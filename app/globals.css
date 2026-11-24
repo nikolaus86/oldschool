@@ -1,24 +1,43 @@
 @import "tailwindcss";
 
 @theme {
-  --font-anton: var(--font-anton), sans-serif;
-  --font-oswald: var(--font-oswald), sans-serif;
+  --font-montserrat: var(--font-montserrat), sans-serif;
+  --font-inter: var(--font-inter), sans-serif;
+  --font-neucha: var(--font-neucha), cursive;
+  --color-kiosk-pink: #ff007f;
+  --color-kiosk-cyan: #00ffff;
+  --color-kiosk-yellow: #ffe600;
+  --color-kiosk-purple: #4a0e4e;
+  --color-paper: #fdf8e4;
 }
 
 body {
-  background-color: #0a0a0a;
-  color: #ededed;
-  font-family: var(--font-inter), system-ui, sans-serif;
-  antialiased: true;
+  background: radial-gradient(circle at top right, #4a0e4e 0%, #1a0b2e 70%);
+  background-attachment: fixed;
 }
 
-.font-anton { font-family: var(--font-anton), sans-serif; }
-.font-oswald { font-family: var(--font-oswald), sans-serif; }
+/* Текст с обводкой для заголовков */
+.text-outline {
+  -webkit-text-stroke: 2px #ff007f;
+  color: white;
+  text-shadow: 4px 4px 0px #000;
+}
 
-/* Скроллбар в стиле 2000-х */
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: #0a0a0a; }
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(#ff1493, #9d4edd);
-  border-radius: 4px;
+.text-outline-cyan {
+  -webkit-text-stroke: 2px #00ffff;
+  color: white;
+  text-shadow: 3px 3px 0px #000;
+}
+
+/* Бумага в клетку для анкеты */
+.bg-grid-paper {
+  background-color: var(--color-paper);
+  background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Эффект стикера */
+.sticker {
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.8);
+  border: 2px solid #000;
 }

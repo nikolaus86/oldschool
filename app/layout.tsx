@@ -1,24 +1,28 @@
 import type { Metadata } from "next";
-import { Anton, Oswald, Inter } from "next/font/google";
+import { Montserrat, Inter, Neucha } from "next/font/google";
 import "./globals.css";
 
-const anton = Anton({
-  weight: "400",
-  subsets: ["latin"], // Убрали cyrillic, так как Anton его не поддерживает
-  variable: "--font-anton",
+const montserrat = Montserrat({
+  weight: ["700", "900"],
+  style: ["normal", "italic"],
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-montserrat",
 });
-const oswald = Oswald({
-  subsets: ["latin", "cyrillic"], // Oswald поддерживает кириллицу
-  variable: "--font-oswald",
-});
+
 const inter = Inter({
-  subsets: ["latin", "cyrillic"], // Inter тоже поддерживает
+  subsets: ["latin", "cyrillic"],
   variable: "--font-inter",
 });
 
+const neucha = Neucha({
+  weight: "400",
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-neucha",
+});
+
 export const metadata: Metadata = {
-  title: "Y2K Magazine Generator",
-  description: "Генератор журналов в стиле нулевых",
+  title: "КИОСК | Твой личный журнал",
+  description: "Создай свой журнал в стиле нулевых",
 };
 
 export default function RootLayout({
@@ -27,11 +31,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="ru"
-      className={`${anton.variable} ${oswald.variable} ${inter.variable}`}
-    >
-      <body className="bg-neutral-950 text-white antialiased min-h-screen">
+    <html lang="ru" className={`${montserrat.variable} ${inter.variable} ${neucha.variable}`}>
+      <body className="bg-[#1a0b2e] text-white font-inter antialiased min-h-screen selection:bg-pink-500 selection:text-white">
         {children}
       </body>
     </html>
