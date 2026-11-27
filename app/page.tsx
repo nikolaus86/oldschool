@@ -139,26 +139,71 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Дракулаура */}
-<div className="flex-1 relative hidden md:flex justify-center items-center">
-  <div className="relative w-full max-w-[500px] h-[650px] flex items-end justify-center">
-    <img
-      src="/draculaura.png"
-      alt="Draculaura"
-      className="w-full h-full object-contain object-bottom scale-110 drop-shadow-[0_0_30px_rgba(255,0,127,0.6)]"
-    />
+            
+{/* 1. HERO */}
+<section
+  id="hero"
+  className="relative pt-4 md:pt-10 flex flex-col md:flex-row items-center gap-8 md:gap-8"
+>
+  {/* Текст */}
+  <div className="flex-1 w-full min-w-0">
+    <div className="bg-kiosk-pink text-white font-bold text-xs px-4 py-1 w-max max-w-full -rotate-2 mb-6 shadow-[3px_3px_0px_#000] uppercase tracking-wider">
+      Специальный выпуск о тебе
+    </div>
 
-    <div className="absolute top-10 right-0 bg-[#1a0b2e] border-2 border-dashed border-kiosk-cyan/50 p-3 rounded-sm text-center text-xs font-bold text-kiosk-yellow shadow-lg rotate-3">
-      <span className="text-white">№ 001</span>
-      <br />
-      ВЕСНА 2026
-      <br />
-      <span className="text-white/50 text-[10px]">
-        ТИРАЖ: 1 ШТ.
-      </span>
+    <h1 className="text-[clamp(3.5rem,15vw,10rem)] font-montserrat italic font-black text-outline-pink uppercase leading-[0.85] mb-6">
+      КИОСК
+    </h1>
+
+    <p className="text-xl sm:text-2xl md:text-3xl text-kiosk-yellow font-montserrat italic font-bold mb-6 md:mb-8">
+      журнал, которого не было ни в одном киоске
+    </p>
+
+    <p className="text-white/90 max-w-xl text-base sm:text-lg leading-relaxed mb-8">
+      Помнишь запах нового журнала из киоска? Игрушка, которая шла в комплекте. Тест «На сколько хорошо ты знаешь…?». Все эти журналы были про кого-то.{" "}
+      <strong className="text-white">
+        Мы сделали наоборот. Главный герой – реальный человек.
+      </strong>
+    </p>
+
+    <div className="flex flex-col sm:flex-row flex-wrap gap-4">
+      <a
+        href="#form"
+        className="bg-kiosk-pink text-white font-montserrat italic font-bold text-sm px-6 sm:px-8 py-3 rounded-full border-2 border-white shadow-[4px_4px_0px_#000] hover:-translate-y-1 transition-all text-center"
+      >
+        СОБРАТЬ СВОЙ ВЫПУСК
+      </a>
+
+      <a
+        href="#issues"
+        className="bg-transparent text-white font-montserrat italic font-bold text-sm px-6 sm:px-8 py-3 rounded-full border-2 border-white hover:bg-white/10 transition-all text-center"
+      >
+        ПОСМОТРЕТЬ НОМЕРА
+      </a>
     </div>
   </div>
-</div>
+
+  {/* Дракулаура */}
+  <div className="w-full md:flex-1 relative flex justify-center items-center">
+    <div className="relative w-full max-w-[300px] h-[360px] sm:max-w-[400px] sm:h-[480px] md:max-w-[500px] md:h-[650px] flex items-end justify-center">
+      <img
+        src="/draculaura.png"
+        alt="Draculaura"
+        className="w-full h-full object-contain object-bottom md:scale-110 drop-shadow-[0_0_30px_rgba(255,0,127,0.6)]"
+      />
+
+      <div className="absolute top-4 right-0 sm:top-10 bg-[#1a0b2e] border-2 border-dashed border-kiosk-cyan/50 p-2 sm:p-3 rounded-sm text-center text-[10px] sm:text-xs font-bold text-kiosk-yellow shadow-lg rotate-3">
+        <span className="text-white">№ 001</span>
+        <br />
+        ВЕСНА 2026
+        <br />
+        <span className="text-white/50 text-[9px] sm:text-[10px]">
+          ТИРАЖ: 1 ШТ.
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
 
           {/* 2. О НАС */}
           <section id="about" className="relative">
@@ -177,7 +222,7 @@ export default function Home() {
               
               <div className="flex-1 p-8 flex flex-col justify-center items-center bg-[#f4ecd8] relative overflow-hidden min-h-[400px]">
                 <img src="/silhouette.png" alt="Silhouette" className="absolute -bottom-8 -left-8 w-64 opacity-90 z-0 pointer-events-none" />
-                <div className="relative z-10 w-full max-w-[420px] bg-white shadow-2xl flex items-center justify-center mb-6 rotate-2 p-1 border-2 border-gray-300 hover:rotate-0 transition-transform duration-300">
+                <div className="relative z-10 w-full max-w-[280px] sm:max-w-[360px] md:max-w-[420px] bg-white shadow-2xl flex items-center justify-center mb-6 rotate-2 p-1 border-2 border-gray-300 hover:rotate-0 transition-transform duration-300">
    <img
      src="/magazine-cover.jpg"
      alt="Magazine Cover"
