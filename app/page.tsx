@@ -39,8 +39,8 @@ export default function Home() {
       
       {/* МОДАЛЬНОЕ ОКНО "ЗАКАЗ ОТПРАВЛЕН" */}
       {isOrdered && (
-        <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-grid-paper text-black p-8 md:p-12 max-w-lg w-full text-center relative border-4 border-black shadow-[10px_10px_0px_#ff007f] rotate-1 animate-fade-in">
+        <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="bg-grid-paper text-black p-5 sm:p-8 md:p-12 max-w-lg w-full text-center relative border-4 border-black shadow-[10px_10px_0px_#ff007f] rotate-1 animate-fade-in my-auto">
             {/* Скотч */}
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-cyan-400/80 rotate-2 shadow-sm z-10" />
             
@@ -374,7 +374,7 @@ export default function Home() {
     Наши выпуски
   </h2>
 
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
     {[
       {
         name: "CLASSIC",
