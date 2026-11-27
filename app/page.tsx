@@ -67,16 +67,22 @@ export default function Home() {
       )}
 
       {/* ШАПКА */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#1a0b2e]/90 backdrop-blur-md border-b border-white/10 px-6 py-3 flex justify-between items-center">
-        <a href="#hero" className="w-14 h-14 rounded-full border-2 border-pink-500 bg-white flex items-center justify-center shadow-[0_0_15px_#ff007f] overflow-hidden hover:scale-105 transition-transform">
-          <img src="/kiosk-logo.png" alt="Kiosk Logo" className="w-full h-full object-cover" />
-        </a>
-        <a href="#form" className="bg-kiosk-pink text-white font-montserrat italic font-bold text-sm px-6 py-2 rounded-full border-2 border-white shadow-[3px_3px_0px_#000] hover:translate-y-1 hover:shadow-[1px_1px_0px_#000] transition-all uppercase">
-          Заполнить анкету
-        </a>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#1a0b2e]/90 backdrop-blur-md border-b border-white/10 px-4 sm:px-6 py-2 sm:py-3 flex justify-between items-center">
+        <a
+  href="#hero"
+  className="w-11 h-11 sm:w-14 sm:h-14 rounded-full border-2 border-pink-500 bg-white flex items-center justify-center shadow-[0_0_15px_#ff007f] overflow-hidden hover:scale-105 transition-transform shrink-0"
+>
+  <img src="/kiosk-logo.png" alt="Kiosk Logo" className="w-full h-full object-cover" />
+</a>
+        <a
+  href="#form"
+  className="bg-kiosk-pink text-white font-montserrat italic font-bold text-[11px] sm:text-sm px-4 sm:px-6 py-2 rounded-full border-2 border-white shadow-[3px_3px_0px_#000] uppercase text-center"
+>
+  Заполнить анкету
+</a>
       </header>
 
-      <div className="max-w-[1400px] mx-auto px-6 pt-24 pb-20 flex gap-12">
+      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 pt-24 pb-12 md:pb-20 flex gap-12">
         
         {/* ЛЕВОЕ МЕНЮ */}
         <aside className="hidden lg:block w-56 shrink-0">
@@ -106,10 +112,10 @@ export default function Home() {
         </aside>
 
         {/* ОСНОВНОЙ КОНТЕНТ */}
-        <div className="flex-1 max-w-5xl space-y-32">
+        <div className="flex-1 min-w-0 max-w-5xl space-y-20 md:space-y-32">
           
           {/* 1. HERO */}
-          <section id="hero" className="relative pt-10 flex flex-col md:flex-row items-center gap-8">
+          <section id="hero" className="relative pt-8 md:pt-10 flex flex-col md:flex-row items-center gap-6 md:gap-8 px-4 md:px-0">
             <div className="flex-1">
               <div className="bg-kiosk-pink text-white font-bold text-xs px-4 py-1 w-max -rotate-2 mb-6 shadow-[3px_3px_0px_#000] uppercase tracking-wider">
                 Специальный выпуск о тебе
