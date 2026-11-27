@@ -134,18 +134,25 @@ export default function Home() {
             </div>
 
             {/* Дракулаура */}
-            <div className="relative w-full max-w-[500px] h-[650px] flex items-end justify-center">
-  <img
-    src="/draculaura.png"
-    alt="Draculaura"
-    className="w-full h-full object-contain object-bottom scale-110 drop-shadow-[0_0_30px_rgba(255,0,127,0.6)]"
-  />
-                <div className="absolute top-10 right-0 bg-[#1a0b2e] border-2 border-dashed border-kiosk-cyan/50 p-3 rounded-sm text-center text-xs font-bold text-kiosk-yellow shadow-lg rotate-3">
-                  <span className="text-white">№ 001</span><br/>ВЕСНА 2026<br/><span className="text-white/50 text-[10px]">ТИРАЖ: 1 ШТ.</span>
-                </div>
-              </div>
-            </div>
-          </section>
+<div className="flex-1 relative hidden md:flex justify-center items-center">
+  <div className="relative w-full max-w-[500px] h-[650px] flex items-end justify-center">
+    <img
+      src="/draculaura.png"
+      alt="Draculaura"
+      className="w-full h-full object-contain object-bottom scale-110 drop-shadow-[0_0_30px_rgba(255,0,127,0.6)]"
+    />
+
+    <div className="absolute top-10 right-0 bg-[#1a0b2e] border-2 border-dashed border-kiosk-cyan/50 p-3 rounded-sm text-center text-xs font-bold text-kiosk-yellow shadow-lg rotate-3">
+      <span className="text-white">№ 001</span>
+      <br />
+      ВЕСНА 2026
+      <br />
+      <span className="text-white/50 text-[10px]">
+        ТИРАЖ: 1 ШТ.
+      </span>
+    </div>
+  </div>
+</div>
 
           {/* 2. О НАС */}
           <section id="about" className="relative">
