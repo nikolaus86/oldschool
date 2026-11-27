@@ -16,7 +16,7 @@ export async function POST(req: Request) {
 
     const finalPrompt = [
   body.imagePrompt,
-  `character in the style of ${body.universe}`,
+  `character in the style of ${body.universes}`,
   `mood: ${moodEn}`,
   "early 2000s magazine cover aesthetic",
   "glossy, airbrushed skin, Y2K fashion editorial",
