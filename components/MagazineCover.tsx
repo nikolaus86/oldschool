@@ -19,7 +19,9 @@ const PALETTES: Record<
 };
 
 export default function MagazineCover({ params, imageUrl }: Props) {
-  const p = PALETTES[params.colorPalette];
+  // Защита: если colorPalette вдруг нет, используем 'pink'
+  const paletteKey = params.colorPalette && PALETTES[params.colorPalette] ? params.colorPalette : "pink";
+  const p = PALETTES[paletteKey];
 
   return (
     <div

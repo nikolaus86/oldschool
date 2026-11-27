@@ -46,7 +46,7 @@ export default function ResultPage() {
     }
 
     setParams(parsed);
-    generate(parsed);
+    if (parsed.heroPhoto) { setImageUrl(parsed.heroPhoto); setLoading(false); } else generate(parsed);
   }, [router]);
 
   const generate = async (p: MagazineParams) => {

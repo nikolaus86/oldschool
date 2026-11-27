@@ -15,15 +15,13 @@ export async function POST(req: Request) {
     const moodEn = MOOD_MAP[body.mood] || body.mood;
 
     const finalPrompt = [
-      body.imagePrompt,
-      "early 2000s magazine cover aesthetic",
-      "glossy, airbrushed skin, Y2K fashion editorial",
-      moodEn,
-      "high resolution, professional photography",
-    ]
-      .filter(Boolean)
-      .join(", ")
-      .slice(0, 280);
+  body.imagePrompt,
+  `character in the style of ${body.universe}`,
+  `mood: ${moodEn}`,
+  "early 2000s magazine cover aesthetic",
+  "glossy, airbrushed skin, Y2K fashion editorial",
+  "high resolution, professional photography",
+].filter(Boolean).join(", ").slice(0, 300);
 
     const encoded = encodeURIComponent(finalPrompt);
     const seed = Math.floor(Math.random() * 999_999);

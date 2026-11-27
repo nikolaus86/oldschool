@@ -1,264 +1,412 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import MagazineForm from "@/components/MagazineForm";
 import { DEFAULT_PARAMS, STORAGE_KEY } from "@/types/magazine";
 import type { MagazineParams } from "@/types/magazine";
 
 export default function Home() {
-  const router = useRouter();
   const [navigating, setNavigating] = useState(false);
+  const [isOrdered, setIsOrdered] = useState(false); // Состояние для окна "Заказ отправлен"
 
-  const handleGenerate = (params: MagazineParams) => {
+    const handleGenerate = async (params: MagazineParams) => {
     setNavigating(true);
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(params));
-    router.push("/result");
+    
+    try {
+      // Отправляем заказ на сервер
+      const res = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(params),
+      });
+
+      if (!res.ok) throw new Error("Ошибка отправки");
+
+      // Сохраняем локально (на всякий случай)
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(params));
+      
+      // Показываем окно успеха
+      setIsOrdered(true); 
+    } catch (error) {
+      alert("Не удалось отправить заказ. Попробуйте еще раз.");
+    } finally {
+      setNavigating(false);
+    }
   };
 
   return (
-    <main className="min-h-screen font-inter">
-      {/* ХЕДЕР */}
-      <header className="sticky top-0 z-50 bg-[#1a0b2e]/90 backdrop-blur-md border-b border-white/10 px-4 py-3">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <a href="#hero" className="w-12 h-12 rounded-full border-2 border-pink-500 bg-white/5 flex items-center justify-center font-montserrat italic font-black text-pink-500 text-xs">
-            Kiosk
-          </a>
-          <nav className="hidden md:flex gap-6 font-montserrat italic font-bold text-sm uppercase">
-            <a href="#hero" className="text-kiosk-yellow hover:text-white">Главная</a>
-            <a href="#about" className="hover:text-kiosk-pink">Приветствие</a>
-            <a href="#inside" className="hover:text-kiosk-pink">Что внутри</a>
-            <a href="#how" className="hover:text-kiosk-pink">Как заказать</a>
-            <a href="#issues" className="hover:text-kiosk-pink">Выпуски</a>
-            <a href="#form" className="hover:text-kiosk-pink">Анкета</a>
-          </nav>
-          <a href="#form" className="md:hidden bg-kiosk-pink text-white px-4 py-2 rounded-full font-bold text-xs">
-            Создать
-          </a>
+    <main className="min-h-screen font-inter text-white bg-[#1a0b2e]">
+      
+      {/* МОДАЛЬНОЕ ОКНО "ЗАКАЗ ОТПРАВЛЕН" */}
+      {isOrdered && (
+        <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-grid-paper text-black p-8 md:p-12 max-w-lg w-full text-center relative border-4 border-black shadow-[10px_10px_0px_#ff007f] rotate-1 animate-fade-in">
+            {/* Скотч */}
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-cyan-400/80 rotate-2 shadow-sm z-10" />
+            
+            <h2 className="text-4xl md:text-5xl font-montserrat italic font-black text-kiosk-purple uppercase mb-4 leading-tight">
+              Заказ отправлен!
+            </h2>
+            <p className="text-lg font-bold mb-6">
+              Твоя анкета улетела в редакцию. Мы уже достаем ножницы, клей и достаем лучшие фотографии.
+            </p>
+            <div className="bg-white border-2 border-black p-4 mb-8 shadow-[3px_3px_0px_#000]">
+              <p className="font-neucha text-2xl text-kiosk-pink">
+                «Совсем скоро твой личный журнал будет готов!»
+              </p>
+            </div>
+            
+            <button 
+              onClick={() => setIsOrdered(false)}
+              className="bg-kiosk-pink text-white font-montserrat italic font-bold text-lg px-8 py-3 rounded-full border-2 border-black shadow-[4px_4px_0px_#000] hover:translate-y-1 hover:shadow-[2px_2px_0px_#000] transition-all uppercase"
+            >
+              Отлично!
+            </button>
+          </div>
         </div>
+      )}
+
+      {/* ШАПКА */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#1a0b2e]/90 backdrop-blur-md border-b border-white/10 px-6 py-3 flex justify-between items-center">
+        <a href="#hero" className="w-14 h-14 rounded-full border-2 border-pink-500 bg-white flex items-center justify-center shadow-[0_0_15px_#ff007f] overflow-hidden hover:scale-105 transition-transform">
+          <img src="/kiosk-logo.png" alt="Kiosk Logo" className="w-full h-full object-cover" />
+        </a>
+        <a href="#form" className="bg-kiosk-pink text-white font-montserrat italic font-bold text-sm px-6 py-2 rounded-full border-2 border-white shadow-[3px_3px_0px_#000] hover:translate-y-1 hover:shadow-[1px_1px_0px_#000] transition-all uppercase">
+          Заполнить анкету
+        </a>
       </header>
 
-      {/* 1. HERO */}
-      <section id="hero" className="max-w-7xl mx-auto px-4 py-16 md:py-24 flex flex-col md:flex-row items-center gap-12 relative">
-        <div className="flex-1 z-10">
-          <div className="inline-block bg-kiosk-pink text-white font-bold text-sm px-4 py-1.5 mb-6 -rotate-2 shadow-[3px_3px_0px_#000]">
-            СПЕЦИАЛЬНЫЙ ВЫПУСК О ТЕБЕ
-          </div>
-          <h1 className="text-7xl md:text-9xl font-montserrat italic font-black text-outline uppercase leading-none mb-6">
-            КИОСК
-          </h1>
-          <p className="text-xl md:text-2xl text-kiosk-yellow font-montserrat italic font-bold mb-6">
-            журнал, которого не было ни в одном киоске
-          </p>
-          <p className="text-white/80 max-w-lg mb-8 text-lg">
-            Помнишь, как выбирал журналы у дома? Мы вернули это чувство — только теперь каждый номер посвящен твоему человеку: обложка с его лицом, письмо от редактора, комикс, тесты и лист стикеров внутри.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <a
-              href="#form"
-              className="bg-kiosk-pink text-white font-black text-lg px-8 py-3 rounded-full border-2 border-white shadow-[4px_4px_0px_#000] hover:translate-y-1 hover:shadow-[2px_2px_0px_#000] transition-all"
-            >
-              СОБРАТЬ СВОЙ ВЫПУСК
-            </a>
-            <a
-              href="#issues"
-              className="bg-transparent text-white font-black text-lg px-8 py-3 rounded-full border-2 border-white hover:bg-white/10 transition-all inline-block text-center"
-            >
-              ПОСМОТРЕТЬ НОМЕРА
-            </a>
-          </div>
-        </div>
+      <div className="max-w-[1400px] mx-auto px-6 pt-24 pb-20 flex gap-12">
         
-        {/* Место под аниме-девочку */}
-        <div className="flex-1 relative hidden md:flex justify-center items-center">
-          <div className="relative w-full max-w-sm flex justify-center">
-  <img
-    src="/girl.png"
-    alt="Персонаж на обложке"
-    className="w-full h-auto drop-shadow-[0_0_40px_rgba(255,0,127,0.6)]"
-  />
-  <div className="absolute top-10 right-0 bg-[#1a0b2e] border border-pink-500/50 p-4 rounded text-xs font-bold text-kiosk-yellow shadow-lg rotate-3">
-    № 001<br/>ВЕСНА 2026<br/>ТИРАЖ: 1 ШТ.
-  </div>
-</div>
-        </div>
-      </section>
+        {/* ЛЕВОЕ МЕНЮ */}
+        <aside className="hidden lg:block w-56 shrink-0">
+          <nav className="sticky top-28 flex flex-col gap-6 font-montserrat italic font-black text-xl uppercase tracking-tighter">
+            <a href="#hero" className="text-kiosk-yellow flex flex-col">
+              Главная <span className="text-xs text-white/50 tracking-normal not-italic font-medium mt-1">→ титульный лист</span>
+            </a>
+            <a href="#about" className="text-white hover:text-kiosk-yellow transition-colors flex flex-col">
+              О нас <span className="text-xs text-white/50 tracking-normal not-italic font-medium mt-1">это не просто журнал</span>
+            </a>
+            <a href="#inside" className="text-white hover:text-kiosk-yellow transition-colors flex flex-col">
+              Что внутри? <span className="text-xs text-white/50 tracking-normal not-italic font-medium mt-1">обложка · комикс · тест</span>
+            </a>
+            <a href="#how" className="text-white hover:text-kiosk-yellow transition-colors flex flex-col">
+              Как заказать? <span className="text-xs text-white/50 tracking-normal not-italic font-medium mt-1">5 шагов</span>
+            </a>
+            <a href="#price" className="text-white hover:text-kiosk-yellow transition-colors flex flex-col">
+              Цена <span className="text-xs text-white/50 tracking-normal not-italic font-medium mt-1">от чего зависит</span>
+            </a>
+            <a href="#issues" className="text-white hover:text-kiosk-yellow transition-colors flex flex-col">
+              Наши выпуски <span className="text-xs text-white/50 tracking-normal not-italic font-medium mt-1">повод есть всегда</span>
+            </a>
+            <a href="#form" className="text-white hover:text-kiosk-yellow transition-colors flex flex-col">
+              Анкета <span className="text-xs text-white/50 tracking-normal not-italic font-medium mt-1">беги заполнять</span>
+            </a>
+          </nav>
+        </aside>
 
-      {/* 2. ПРИВЕТСТВИЕ */}
-      <section id="about" className="bg-[#140822] py-20 px-4 relative">
-        <div className="max-w-5xl mx-auto bg-paper text-black p-8 md:p-12 shadow-[10px_10px_0px_#ff007f] rotate-1">
-          <h2 className="text-4xl md:text-5xl font-montserrat italic font-black text-kiosk-purple uppercase mb-6 -rotate-1">
-            Мы вернули те самые журналы
-          </h2>
-          <div className="grid md:grid-cols-2 gap-8 text-lg">
-            <div className="space-y-4">
-              <p>В детстве всё важное было на бумаге: обложка с обладателем премии, вкладыш с наклейками, страница с тестом, который решал, кем тебе быть в этом месяце.</p>
-              <p className="font-bold">Выбирать журнал у киоска было целым событием — ты держал его в руках, листал прямо у стенки и уносил домой.</p>
-              <p>Мы сделали «Киоск» из тоски по этим ощущениям. Только теперь на обложке — не дальная звезда, а твой одногруппник, твоя сестра или человек, с которым у вас своя история.</p>
-              <p className="font-neucha text-2xl text-kiosk-pink mt-6">бумага, клей, ножницы и очень много любви</p>
-            </div>
-            <div className="flex flex-col justify-center items-center bg-white p-4 shadow-xl border border-gray-200">
-  <img
-    src="/magazine.png"
-    alt="Пример журнала"
-    className="w-full h-auto object-contain mb-4"
-  />
-  <div className="bg-yellow-200 p-4 w-full font-bold text-center border border-black rotate-2">
-    «Каждый номер печатается в одном экземпляре — второго такого не будет»
-  </div>
-</div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. ЧТО ВНУТРИ */}
-      <section id="inside" className="py-20 px-4 max-w-5xl mx-auto">
-        <h2 className="text-center text-4xl md:text-6xl font-montserrat italic font-black text-outline-cyan mb-4 uppercase">
-          Что внутри журнала
-        </h2>
-        <p className="text-center text-white/60 mb-12 italic">Открываешь наугад — и начинается овалют...</p>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {[
-            { title: "ОБЛОЖКА", text: "Фото твоего человека, его имя и номер выпуска — как в том самом журнале из детства.", color: "bg-kiosk-yellow", rotate: "-rotate-1" },
-            { title: "ПИСЬМО РЕДАКТОРА", text: "Для попсов и о том, почему мы снова делаем бумагу, и что в ней важнее экрана.", color: "bg-kiosk-yellow", rotate: "rotate-1" },
-            { title: "КОМИКС", text: "Четыре полосы, где главный герой — ваша история: как вы познакомились и что было потом.", color: "bg-kiosk-yellow", rotate: "rotate-2" },
-            { title: "ТЕСТ", text: "«Кто ты: партнёр по кино-вечерам?» — с ответами на полях и вердиктом редакции.", color: "bg-kiosk-yellow", rotate: "-rotate-2" },
-            { title: "ФАКТЫ И СТИКЕРЫ", text: "Десять фактов о вашем человеке и лист наклеек — их можно оторвать и приклеить на тетрадь.", color: "bg-kiosk-yellow", rotate: "rotate-1", full: true },
-          ].map((item, i) => (
-            <div key={i} className={`${item.color} ${item.rotate} ${item.full ? "md:col-span-2" : ""} p-6 md:p-8 sticker relative`}>
-              <div className="absolute -top-4 -left-2 bg-kiosk-cyan text-black text-xs font-bold px-3 py-1 border border-black rotate-[-5deg]">
-                {i % 2 === 0 ? "А что там вообще внутри?" : "А кто это всё придумал?"}
+        {/* ОСНОВНОЙ КОНТЕНТ */}
+        <div className="flex-1 max-w-5xl space-y-32">
+          
+          {/* 1. HERO */}
+          <section id="hero" className="relative pt-10 flex flex-col md:flex-row items-center gap-8">
+            <div className="flex-1">
+              <div className="bg-kiosk-pink text-white font-bold text-xs px-4 py-1 w-max -rotate-2 mb-6 shadow-[3px_3px_0px_#000] uppercase tracking-wider">
+                Специальный выпуск о тебе
               </div>
-              <h3 className="text-2xl font-montserrat italic font-black text-kiosk-pink mb-2">{item.title}</h3>
-              <p className="text-black font-medium text-lg">{item.text}</p>
-              <div className="absolute -right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-kiosk-pink rounded-full border-2 border-black flex items-center justify-center font-bold text-white text-xs rotate-12">
-                СТР {i + 3}
+              <h1 className="text-[120px] md:text-[160px] font-montserrat italic font-black text-outline-pink uppercase leading-[0.8] mb-6">
+                КИОСК
+              </h1>
+              <p className="text-2xl md:text-3xl text-kiosk-yellow font-montserrat italic font-bold mb-8">
+                журнал, которого не было ни в одном киоске
+              </p>
+              <p className="text-white/90 max-w-xl text-lg leading-relaxed mb-10">
+                Помнишь запах нового журнала из киоска? Игрушка, которая шла в комплекте. Тест «На сколько хорошо ты знаешь…?». Все эти журналы были про кого-то. <strong className="text-white">Мы сделали наоборот. Главный герой – реальный человек.</strong>
+              </p>
+              <div className="flex gap-4">
+                <a href="#form" className="bg-kiosk-pink text-white font-montserrat italic font-bold text-sm px-8 py-3 rounded-full border-2 border-white shadow-[4px_4px_0px_#000] hover:-translate-y-1 transition-all">
+                  СОБРАТЬ СВОЙ ВЫПУСК
+                </a>
+                <a href="#issues" className="bg-transparent text-white font-montserrat italic font-bold text-sm px-8 py-3 rounded-full border-2 border-white hover:bg-white/10 transition-all">
+                  ПОСМОТРЕТЬ НОМЕРА
+                </a>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* 4. КАК ЗАКАЗАТЬ */}
-      <section id="how" className="bg-[#140822] py-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-center text-4xl md:text-5xl font-montserrat italic font-black text-outline mb-12 uppercase">
-            Как заказать свой номер
-          </h2>
-          <div className="grid md:grid-cols-4 gap-6">
-            {[
-              { num: 1, title: "ВЫБЕРИ ГЕРОЯ", text: "Партнёр, мама, подруга или кот — тот, кто вдохновляет." },
-              { num: 2, title: "РАССКАЖИ О НЁМ", text: "Заполнишь анкету: увлечения, ваши истории, любимые шутки и фото." },
-              { num: 3, title: "МЫ СДЕЛАЕМ НОМЕР", text: "Пишем тексты, рисуем комикс, собираем обложку." },
-              { num: 4, title: "ЗАБИРАЙ И ДАРИ", text: "Через 7 дней курьер звонит в дверь — и ты вручаешь бумажный шедевр." },
-            ].map((step) => (
-              <div key={step.num} className="bg-paper text-black p-6 relative border-2 border-black shadow-[4px_4px_0px_#ff007f]">
-                <div className="absolute -top-5 -left-4 w-12 h-12 bg-kiosk-pink text-white rounded-full flex items-center justify-center font-montserrat font-black text-2xl border-2 border-black shadow-md">
-                  {step.num}
+            {/* Дракулаура */}
+            <div className="flex-1 relative hidden md:flex justify-center items-center">
+              <div className="relative w-80 h-[500px] flex items-end justify-center">
+                <img 
+                  src="/draculaura.png" 
+                  alt="Draculaura" 
+                  className="w-full h-auto object-contain drop-shadow-[0_0_30px_rgba(255,0,127,0.6)]" 
+                />
+                <div className="absolute top-10 right-0 bg-[#1a0b2e] border-2 border-dashed border-kiosk-cyan/50 p-3 rounded-sm text-center text-xs font-bold text-kiosk-yellow shadow-lg rotate-3">
+                  <span className="text-white">№ 001</span><br/>ВЕСНА 2026<br/><span className="text-white/50 text-[10px]">ТИРАЖ: 1 ШТ.</span>
                 </div>
-                <h3 className="font-montserrat italic font-black text-xl mt-4 mb-2">{step.title}</h3>
-                <p className="text-sm font-medium">{step.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 5. ВЫПУСКИ */}
-      <section id="issues" className="py-20 px-4 max-w-7xl mx-auto">
-        <h2 className="text-center text-4xl md:text-5xl font-montserrat italic font-black text-outline-cyan mb-4 uppercase">
-          Наши выпуски
-        </h2>
-        <p className="text-center text-white/60 mb-12">Четыре номера, четыре человека, четыре повода плакать от нежности</p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            { name: "КИОСК", theme: "МАЙ", color: "bg-pink-500", title: "ТЕСТ: МЫ НА ЛЕТО?", subtitle: "КОМИКС: ТА САМАЯ ВСТРЕЧА" },
-            { name: "КИОСК", theme: "АПРЕЛЬ", color: "bg-cyan-500", title: "ОН И ЕГО ПЛЕЙЛИСТ", subtitle: "ГДЕ Я ХОЧУ ОТДОХНУТЬ" },
-            { name: "КИОСК", theme: "МАЙ", color: "bg-yellow-500", title: "РЕЦЕПТ ЕЁ ПИРОГА", subtitle: "ПИСЬМО ДОЧЕРИ" },
-            { name: "КИОСК", theme: "ИЮНЬ", color: "bg-pink-500", title: "ДВОЕ ГОДА", subtitle: "МЕЖДУ НА РАЗВОРОТЕ" },
-          ].map((issue, i) => (
-            <div key={i} className="relative group">
-              <div className="aspect-[3/4] bg-gray-800 rounded-lg overflow-hidden relative border-2 border-white/20">
-  <img
-    src={`/issue-${i + 1}.jpg`}
-    alt={`Выпуск ${issue.theme}`}
-    className="absolute inset-0 w-full h-full object-cover z-0"
-  />
-  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
-  <div className="absolute top-0 left-0 right-0 p-4 z-20 flex justify-between items-start">
-    <h3 className="font-montserrat italic font-black text-2xl text-white drop-shadow-md">{issue.name}</h3>
-    <div className={`${issue.color} text-black text-[10px] font-bold px-2 py-1 rounded-sm rotate-3`}>
-      {issue.theme} · №0{i + 1}
-    </div>
-  </div>
-</div>
-              <div className="mt-4 flex flex-col gap-2">
-                <div className="bg-white text-black font-bold text-xs px-2 py-1 w-max">{issue.title}</div>
-                <div className="bg-white text-black font-bold text-xs px-2 py-1 w-max">{issue.subtitle}</div>
-                <p className="text-xs text-white/50 leading-tight mt-2">Выпуск про подругу. От подруги: подруги; плакала на каждой странице.</p>
               </div>
             </div>
-          ))}
-        </div>
-      </section>
+          </section>
 
-      {/* 6. АНКЕТА (Форма внизу страницы, как в Figma) */}
-      <section id="form" className="py-20 px-4 bg-[#140822]">
-        <div className="w-full max-w-3xl mx-auto text-center mb-8">
-          <h2 className="text-4xl md:text-6xl font-montserrat italic font-black text-outline uppercase mb-2">
-            АНКЕТА БУДУЩЕГО НОМЕРА
-          </h2>
-          <p className="text-white/70 italic">Пять коротких шагов — и у редакции появляется весь материал</p>
-        </div>
+          {/* 2. О НАС */}
+          <section id="about" className="relative">
+            <div className="bg-paper text-black rounded-lg overflow-hidden flex flex-col md:flex-row shadow-[10px_10px_0px_#ff007f] border-4 border-white/20 relative">
+              <div className="flex-1 p-8 md:p-12 relative border-b-4 md:border-b-0 md:border-r-4 border-gray-300 bg-grid-paper">
+                <h2 className="text-3xl md:text-5xl font-montserrat italic font-black text-kiosk-purple uppercase mb-6 leading-tight">
+                  Мы вернули те самые журналы
+                </h2>
+                <div className="space-y-4 text-sm md:text-base font-medium">
+                  <p>В детстве всё важное было на бумаге: обложка с обладателем премии, вкладыш с наклейками, страница с тестом, который решал, кем тебе быть в этом месяце.</p>
+                  <p className="font-bold">Выбирать журнал у киоска было целым событием — ты держал его в руках, листал прямо у стенки и уносил домой.</p>
+                  <p>Мы сделали «Киоск» из тоски по этим ощущениям. Только теперь на обложке — не дальняя звезда, а твой одногруппник, твоя сестра или человек, с которым у вас своя история.</p>
+                </div>
+                <p className="font-neucha text-2xl text-kiosk-pink mt-8">бумага, клей, ножницы и очень много любви</p>
+              </div>
+              
+              <div className="flex-1 p-8 flex flex-col justify-center items-center bg-[#f4ecd8] relative overflow-hidden min-h-[400px]">
+                <img src="/silhouette.png" alt="Silhouette" className="absolute -bottom-8 -left-8 w-64 opacity-90 z-0 pointer-events-none" />
+                <div className="relative z-10 w-64 bg-white shadow-2xl flex items-center justify-center mb-6 rotate-2 p-1 border-2 border-gray-300 hover:rotate-0 transition-transform duration-300">
+                   <img src="/magazine-cover.jpg" alt="Magazine Cover" className="w-full h-auto" />
+                </div>
+                <div className="relative z-10 bg-yellow-200 p-4 w-full max-w-xs font-bold text-center border-2 border-black -rotate-1 text-sm shadow-[3px_3px_0px_#000]">
+                  «Каждый номер печатается в одном экземпляре — второго такого не будет»
+                </div>
+              </div>
+            </div>
+          </section>
 
-        {/* Лист бумаги */}
-        <div className="w-full max-w-3xl mx-auto bg-grid-paper text-black p-6 md:p-10 shadow-[10px_10px_0px_#ff007f] relative border-4 border-gray-300 rotate-1">
-          {/* Декоративный скотч сверху */}
-          <div className="absolute -top-4 left-10 w-24 h-8 bg-cyan-400/80 rotate-[-5deg] shadow-sm z-10" />
-          <div className="absolute -top-4 right-20 w-20 h-8 bg-yellow-400/80 rotate-[3deg] shadow-sm z-10" />
+          {/* 3. ЧТО ВНУТРИ */}
+          <section id="inside">
+            <h2 className="text-center text-5xl md:text-7xl font-montserrat italic font-black text-outline-pink mb-12 uppercase">
+              Что внутри журнала?
+            </h2>
+            
+            <div className="bg-grid-paper p-6 md:p-12 rounded-lg shadow-2xl relative border-4 border-[#e5dec5]">
+              <div className="absolute -top-4 left-10 w-24 h-8 bg-cyan-400/80 rotate-[-5deg] shadow-sm z-10" />
+              <div className="absolute -top-4 right-20 w-20 h-8 bg-yellow-400/80 rotate-[3deg] shadow-sm z-10" />
 
-          <div className="mb-8 border-2 border-black rounded-full overflow-hidden h-6 relative bg-white">
-            <div className="absolute top-0 left-0 h-full bg-kiosk-pink w-1/3" />
-            <p className="absolute inset-0 text-center text-xs font-bold leading-5 z-10 uppercase">ШАГ 1 ИЗ 5 — ГЕРОЙ</p>
-          </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+                <div className="flex flex-col relative mt-4">
+                  <div className="bubble-cyan p-4 font-bold text-sm md:text-base w-[90%] z-10">Ну и что там вообще внутри?</div>
+                  <div className="answer-card p-5 -mt-2 ml-4 w-[90%]">
+                    <div className="absolute -right-3 -top-3 w-8 h-8 bg-kiosk-pink rounded-full border-2 border-black flex items-center justify-center text-white text-[10px] font-bold rotate-12">СТР 1</div>
+                    <h3 className="font-montserrat italic font-black text-xl mb-1 text-kiosk-pink">ОБЛОЖКА</h3>
+                    <p className="text-sm font-medium">Фото твоего человека, его имя и номер выпуска — как в том самом журнале из детства.</p>
+                  </div>
+                </div>
 
-          {/* Компонент формы */}
-          <MagazineForm
-            initialParams={DEFAULT_PARAMS}
-            onGenerate={handleGenerate}
-            loading={navigating}
+                <div className="flex flex-col relative mt-4">
+                  <div className="bubble-cyan p-4 font-bold text-sm md:text-base w-[90%] z-10">А кто это всё придумал?</div>
+                  <div className="answer-card p-5 -mt-2 ml-4 w-[90%]">
+                    <div className="absolute -right-3 -top-3 w-8 h-8 bg-kiosk-pink rounded-full border-2 border-black flex items-center justify-center text-white text-[10px] font-bold -rotate-12">СТР 2</div>
+                    <h3 className="font-montserrat italic font-black text-xl mb-1 text-kiosk-pink">ПИСЬМО РЕДАКТОРА</h3>
+                    <p className="text-sm font-medium">Для попсов и о том, почему мы снова делаем бумагу, и что в ней важнее экрана.</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col relative mt-4">
+                  <div className="bubble-cyan p-4 font-bold text-sm md:text-base w-[90%] z-10">А комиксы есть? Без них не считается!</div>
+                  <div className="answer-card p-5 -mt-2 ml-4 w-[90%]">
+                    <div className="absolute -right-3 -top-3 w-8 h-8 bg-kiosk-pink rounded-full border-2 border-black flex items-center justify-center text-white text-[10px] font-bold rotate-12">СТР 6</div>
+                    <h3 className="font-montserrat italic font-black text-xl mb-1 text-kiosk-pink">КОМИКС</h3>
+                    <p className="text-sm font-medium">Целый разворот, где во главе всего — ваша история: как вы познакомились и что было потом.</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col relative mt-4">
+                  <div className="bubble-cyan p-4 font-bold text-sm md:text-base w-[90%] z-10">Меня заставят проходить тесты?</div>
+                  <div className="answer-card p-5 -mt-2 ml-4 w-[90%]">
+                    <div className="absolute -right-3 -top-3 w-8 h-8 bg-kiosk-pink rounded-full border-2 border-black flex items-center justify-center text-white text-[10px] font-bold -rotate-12">СТР 4</div>
+                    <h3 className="font-montserrat italic font-black text-xl mb-1 text-kiosk-pink">ТЕСТ</h3>
+                    <p className="text-sm font-medium">«Кто ты: партнёр по кино-вечерам?» — с ответами на полях и вердиктом редакции.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-12 flex flex-col md:flex-row items-center justify-center gap-6 border-t-2 border-dashed border-gray-400 pt-8">
+                <p className="font-montserrat italic font-black text-xl md:text-2xl text-kiosk-yellow text-outline-purple">
+                  ХВАТИТ ЧИТАТЬ — ПОРА ДЕЛАТЬ СВОЙ НОМЕР!
+                </p>
+                <a href="#form" className="bg-kiosk-pink text-white font-bold text-sm px-6 py-2 rounded-full border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-y-1 hover:shadow-none transition-all uppercase">
+                  Заполнить анкету
+                </a>
+              </div>
+            </div>
+          </section>
+
+          {/* 4. КАК ЗАКАЗАТЬ (5 шагов) */}
+          <section id="how">
+            <h2 className="text-center text-5xl md:text-6xl font-montserrat italic font-black text-outline-cyan mb-16 uppercase">
+              Как заказать свой номер?
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                { num: 1, title: "ВЫБЕРИ ПОВОД", text: "Classic, Happy birthday или To my love." },
+                { num: 2, title: "ЗАПОЛНИ АНКЕТУ", text: "Расскажи о герое и загрузи фото." },
+                { num: 3, title: "МЫ СДЕЛАЕМ НОМЕР", text: "Пишем тексты, собираем обложку." },
+                { num: 4, title: "ЗАБИРАЙ И ДАРИ", text: "Доставим СДЭКОМ или ОЗОН." },
+              ].map((step) => (
+                <div key={step.num} className="bg-paper text-black p-6 pt-8 relative border-2 border-black shadow-[4px_4px_0px_#ff007f]">
+                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 bg-kiosk-pink text-white rounded-full flex items-center justify-center font-montserrat font-black text-xl border-2 border-black">
+                    {step.num}
+                  </div>
+                  <h3 className="font-montserrat italic font-black text-lg mb-2 text-center">{step.title}</h3>
+                  <p className="text-sm font-medium text-center">{step.text}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* 5. ЦЕНА */}
+          <section id="price">
+            <h2 className="text-center text-5xl md:text-6xl font-montserrat italic font-black text-outline-cyan mb-12 uppercase">
+              Цена (от чего зависит)
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              
+              <div className="bg-[#f8c8dc] text-[#3a1524] p-8 rounded-[2rem] flex flex-col h-full border-4 border-[#e59fb6]">
+                <h3 className="font-montserrat font-bold text-2xl mb-2 uppercase">КЛАССИК</h3>
+                <p className="text-sm font-medium mb-6">Для любого повода: выпускной, 8 марта, просто порадовать.</p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <span className="bg-white px-3 py-1 rounded-full text-xs font-bold border border-[#e59fb6]">24-40 фото</span>
+                  <span className="bg-white px-3 py-1 rounded-full text-xs font-bold border border-[#e59fb6]">12 разворотов</span>
+                </div>
+                <p className="font-montserrat font-black text-3xl mb-8 mt-auto">от 3 000 руб.</p>
+                <a href="#form" className="bg-white text-black font-bold py-3 px-6 rounded-full w-full border-2 border-black hover:bg-gray-100 transition-colors uppercase text-sm text-center block">
+                  Выбрать
+                </a>
+              </div>
+
+              <div className="bg-[#c0e8f9] text-[#1a3a4c] p-8 rounded-[2rem] flex flex-col h-full border-4 border-[#8ad1ed] relative">
+                <div className="absolute top-4 right-4 bg-orange-400 text-white text-xs font-bold px-3 py-1 rounded-full border-2 border-white">Хит</div>
+                <h3 className="font-montserrat font-bold text-2xl mb-2 uppercase">ДЕНЬ РОЖДЕНИЯ</h3>
+                <p className="text-sm font-medium mb-6">Праздничная версия с поздравлением и пожеланиями от близких.</p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <span className="bg-white px-3 py-1 rounded-full text-xs font-bold border border-[#8ad1ed]">Больше фото</span>
+                  <span className="bg-white px-3 py-1 rounded-full text-xs font-bold border border-[#8ad1ed]">20 разворотов</span>
+                </div>
+                <p className="font-montserrat font-black text-3xl mb-8 mt-auto">от 3 500 руб.</p>
+                <a href="#form" className="bg-white text-black font-bold py-3 px-6 rounded-full w-full border-2 border-black hover:bg-gray-100 transition-colors uppercase text-sm text-center block">
+                  Выбрать
+                </a>
+              </div>
+
+              <div className="bg-[#f9d8b6] text-[#4a2c16] p-8 rounded-[2rem] flex flex-col h-full border-4 border-[#eab582]">
+                <h3 className="font-montserrat font-bold text-2xl mb-2 uppercase">МОЯ ЛЮБОВЬ</h3>
+                <p className="text-sm font-medium mb-6">Для второй половинки. Романтичная записка и гороскоп.</p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <span className="bg-white px-3 py-1 rounded-full text-xs font-bold border border-[#eab582]">99-150 фото</span>
+                  <span className="bg-white px-3 py-1 rounded-full text-xs font-bold border border-[#eab582]">30 разворотов</span>
+                </div>
+                <p className="font-montserrat font-black text-3xl mb-8 mt-auto">от 4 000 руб.</p>
+                <a href="#form" className="bg-white text-black font-bold py-3 px-6 rounded-full w-full border-2 border-black hover:bg-gray-100 transition-colors uppercase text-sm text-center block">
+                  Выбрать
+                </a>
+              </div>
+
+            </div>
+          </section>
+
+          {/* 6. ВЫПУСКИ */}
+<section id="issues">
+  <h2 className="text-center text-5xl md:text-6xl font-montserrat italic font-black text-outline-cyan mb-16 uppercase">
+    Наши выпуски
+  </h2>
+
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {[
+      {
+        name: "CLASSIC",
+        title: "Для любого повода",
+        color: "bg-kiosk-pink",
+        image: "/magazine1.png",
+      },
+      {
+        name: "HAPPY B-DAY",
+        title: "Праздничная версия",
+        color: "bg-kiosk-cyan text-black",
+        image: "/magazine2.png",
+      },
+      {
+        name: "TO MY LOVE",
+        title: "Для второй половинки",
+        color: "bg-kiosk-yellow text-black",
+        image: "/magazine3.jpg",
+      },
+    ].map((issue, i) => (
+      <div key={i} className="flex flex-col">
+        <div className="aspect-[3/4] bg-gray-800 border-4 border-black shadow-[5px_5px_0px_#ff007f] relative overflow-hidden group">
+
+          <img
+            src={issue.image}
+            alt={issue.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
-        </div>
-      </section>
 
-      {/* 7. ФУТЕР */}
-      <footer className="border-t border-white/10 bg-black/40 py-12 px-4">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-8">
-          <div>
-            <div className="w-16 h-16 rounded-full border-2 border-pink-500 bg-white/5 flex items-center justify-center font-montserrat italic font-black text-pink-500 mb-4">
-              Kiosk
+          <span className={`absolute bottom-4 right-4 ${issue.color} font-bold text-xs px-3 py-1.5 border-2 border-black rotate-3 z-10`}>
+            {issue.name}
+          </span>
+
+        </div>
+
+        <h4 className="font-montserrat font-black text-lg text-kiosk-yellow mt-4 text-center">
+          {issue.title}
+        </h4>
+      </div>
+    ))}
+  </div>
+</section>
+
+          {/* 7. АНКЕТА */}
+          <section id="form" className="pt-10">
+            <div className="w-full max-w-4xl mx-auto text-center mb-10">
+              <h2 className="text-5xl md:text-7xl font-montserrat italic font-black text-outline-pink uppercase mb-4">
+                Анкета будущего номера
+              </h2>
+              <p className="text-white/70 italic font-bold">Заполни все шаги — и мы создадим твой личный журнал</p>
             </div>
-            <p className="font-neucha text-kiosk-yellow text-xl max-w-xs">
+            <MagazineForm
+              initialParams={DEFAULT_PARAMS}
+              onGenerate={handleGenerate}
+              loading={navigating}
+            />
+          </section>
+
+        </div>
+      </div>
+
+      {/* 8. ФУТЕР */}
+      <footer className="border-t-2 border-white/10 bg-[#10051a] py-16 px-6">
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div>
+            <div className="w-20 h-20 rounded-full border-2 border-pink-500 bg-white flex items-center justify-center mb-6 shadow-[0_0_20px_#ff007f] overflow-hidden">
+              <img src="/kiosk-logo.png" alt="Kiosk Logo" className="w-full h-full object-cover" />
+            </div>
+            <h3 className="text-4xl font-montserrat italic font-black text-white mb-2 uppercase">КИОСК</h3>
+            <p className="font-neucha text-kiosk-yellow text-xl">
               Печатаем чувства. Поштучно, на бумаге, с наклейками.
             </p>
           </div>
-          <div className="flex gap-12 text-sm">
-            <div className="flex flex-col gap-2">
-              <span className="font-bold text-white/50 mb-2 uppercase tracking-wider text-xs">В номере</span>
-              <a href="#about" className="text-kiosk-pink font-bold hover:underline">О бренде</a>
-              <a href="#inside" className="text-kiosk-pink font-bold hover:underline">Что внутри</a>
-              <a href="#how" className="text-kiosk-pink font-bold hover:underline">Как заказать</a>
-              <a href="#issues" className="text-kiosk-pink font-bold hover:underline">Выпуски</a>
-            </div>
-            <div className="flex flex-col gap-2">
-              <span className="font-bold text-white/50 mb-2 uppercase tracking-wider text-xs">Связь</span>
-              <a href="mailto:privet@kiosk-mag.ru" className="text-kiosk-pink font-bold hover:underline">privet@kiosk-mag.ru</a>
-              <a href="#" className="text-kiosk-pink font-bold hover:underline">@kiosk_mag</a>
-              <span className="text-white/40 text-xs mt-2">Москва, у любимого метро, с 2026 года</span>
-            </div>
+          
+          <div>
+            <h4 className="font-montserrat italic font-black text-lg text-white mb-6 uppercase">В номере</h4>
+            <ul className="space-y-3 font-bold text-sm text-kiosk-pink">
+              <li><a href="#about" className="hover:underline">О бренде</a></li>
+              <li><a href="#inside" className="hover:underline">Что внутри</a></li>
+              <li><a href="#how" className="hover:underline">Как заказать</a></li>
+              <li><a href="#issues" className="hover:underline">Выпуски</a></li>
+              <li><a href="#form" className="hover:underline">Анкета</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-montserrat italic font-black text-lg text-white mb-6 uppercase">Связь</h4>
+            <ul className="space-y-3 font-bold text-sm text-kiosk-pink">
+              <li><a href="#" className="hover:underline">ПОЧТА</a></li>
+              <li><a href="#" className="hover:underline">ТЕЛЕГРАМ</a></li>
+              <li><a href="#" className="hover:underline">ИНСТАГРАМ</a></li>
+            </ul>
+            <p className="text-white/40 text-xs mt-6 font-bold">Москва, у любимого метро, с 2026 года</p>
           </div>
         </div>
       </footer>

@@ -4,40 +4,168 @@
   --font-montserrat: var(--font-montserrat), sans-serif;
   --font-inter: var(--font-inter), sans-serif;
   --font-neucha: var(--font-neucha), cursive;
+  
   --color-kiosk-pink: #ff007f;
-  --color-kiosk-cyan: #00ffff;
+  --color-kiosk-cyan: #00e5ff;
   --color-kiosk-yellow: #ffe600;
-  --color-kiosk-purple: #4a0e4e;
+  --color-kiosk-purple: #1a0b2e;
   --color-paper: #fdf8e4;
 }
 
 body {
-  background: radial-gradient(circle at top right, #4a0e4e 0%, #1a0b2e 70%);
-  background-attachment: fixed;
+  /* Жестко задаем фиолетовый фон, чтобы он не пропадал */
+  background-color: #1a0b2e;
+  color: white;
 }
 
-/* Текст с обводкой для заголовков */
-.text-outline {
-  -webkit-text-stroke: 2px #ff007f;
+/* Обводка для главного логотипа */
+.text-outline-pink {
   color: white;
-  text-shadow: 4px 4px 0px #000;
+  -webkit-text-stroke: 3px #ff007f;
+  text-shadow: 5px 5px 0px #000;
 }
 
 .text-outline-cyan {
-  -webkit-text-stroke: 2px #00ffff;
   color: white;
+  -webkit-text-stroke: 2px #00e5ff;
+  text-shadow: 4px 4px 0px #000;
+}
+
+.text-outline-purple {
+  color: white;
+  -webkit-text-stroke: 1.5px #2b0b3d;
   text-shadow: 3px 3px 0px #000;
 }
 
-/* Бумага в клетку для анкеты */
+/* Клетчатый фон для бумаги */
 .bg-grid-paper {
   background-color: var(--color-paper);
-  background-image: radial-gradient(#d1d5db 1px, transparent 1px);
-  background-size: 16px 16px;
+  background-image: 
+    linear-gradient(rgba(200, 200, 200, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 200, 200, 0.4) 1px, transparent 1px);
+  background-size: 20px 20px;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.05);
 }
 
-/* Эффект стикера */
-.sticker {
-  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.8);
+/* Облачка для диалога */
+.bubble-cyan {
+  background-color: var(--color-kiosk-cyan);
   border: 2px solid #000;
+  border-radius: 20px;
+  position: relative;
+  color: #000;
 }
+
+.bubble-cyan::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 30px;
+  border-width: 12px 12px 0 0;
+  border-style: solid;
+  border-color: var(--color-kiosk-cyan) transparent transparent transparent;
+  z-index: 10;
+}
+
+.bubble-cyan::before {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 28px;
+  border-width: 14px 14px 0 0;
+  border-style: solid;
+  border-color: #000 transparent transparent transparent;
+  z-index: 9;
+}
+
+/* Желтые карточки ответов */
+.answer-card {
+  background-color: var(--color-kiosk-yellow);
+  border: 2px solid #000;
+  border-radius: 16px;
+  box-shadow: 4px 4px 0px #000;
+  position: relative;
+  z-index: 20;
+}
+
+
+/* ========= АНИМАЦИИ ПРОГРЕСС-БАРА ========= */
+
+/* Полосатая заливка "течет" как карамелька */
+@keyframes barberpole {
+  0%   { background-position: 0 0; }
+  100% { background-position: 40px 0; }
+}
+
+/* Глянцевый блик пробегает по заполненной части */
+@keyframes shimmer {
+  0%   { transform: translateX(-150%) skewX(-15deg); }
+  100% { transform: translateX(350%) skewX(-15deg); }
+}
+
+/* Пульсация сердца в шарике-индикаторе */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 0, 127, 0.7); }
+  50%      { box-shadow: 0 0 0 6px rgba(255, 0, 127, 0); }
+}
+
+.progress-stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #ff007f,
+    #ff007f 10px,
+    #ffe600 10px,
+    #ffe600 20px
+  );
+  background-size: 40px 40px;
+  animation: barberpole 0.8s linear infinite;
+}
+
+.progress-shimmer {
+  animation: shimmer 2.2s ease-in-out infinite;
+}
+
+.progress-pulse {
+  animation: pulse-glow 1.5s ease-out infinite;
+}
+
+
+@keyframes barberpole {
+  0%   { background-position: 0 0; }
+  100% { background-position: 40px 0; }
+}
+
+@keyframes shimmer {
+  0%   { transform: translateX(-150%) skewX(-15deg); }
+  100% { transform: translateX(350%) skewX(-15deg); }
+}
+
+.progress-stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #ff007f,
+    #ff007f 10px,
+    #ffe600 10px,
+    #ffe600 20px
+  );
+  background-size: 40px 40px;
+  animation: barberpole 0.8s linear infinite;
+}
+
+.progress-shimmer {
+  animation: shimmer 2.2s ease-in-out infinite;
+}
+
+/* Animated editorial fairy-light dividers */
+.fairy-divider { position:relative; height:52px; margin:24px 0; overflow:hidden; pointer-events:none; }
+.fairy-divider:before { content:""; position:absolute; left:2%; right:2%; top:14px; height:2px; background:linear-gradient(90deg,#777,#bbb,#777); transform:rotate(-1deg); }
+.fairy-divider .light { position:absolute; top:14px; width:11px; height:17px; border-radius:50% 50% 45% 45%; background:var(--light-color,#ffd86b); box-shadow:0 0 7px var(--light-color,#ffd86b),0 0 18px var(--light-color,#ffd86b); animation:lightTwinkle 1.7s ease-in-out infinite alternate; transform-origin:top center; }
+.fairy-divider .light:nth-child(odd){animation-delay:.5s;top:19px}
+.fairy-divider .light:nth-child(3n){animation-delay:1s;top:23px}
+.fairy-divider.style-color .light{--light-color:#ff4da6}
+.fairy-divider.style-rainbow .light:nth-child(4n){--light-color:#65eaff}
+.fairy-divider.style-rainbow .light:nth-child(4n+1){--light-color:#ffec58}
+.fairy-divider.style-rainbow .light:nth-child(4n+2){--light-color:#ff5e8a}
+.fairy-divider.style-rainbow .light:nth-child(4n+3){--light-color:#8dff8a}
+@keyframes lightTwinkle{0%{opacity:.45;filter:brightness(.65);transform:scale(.85) rotate(-3deg)}100%{opacity:1;filter:brightness(1.4);transform:scale(1.12) rotate(3deg)}}
+@media(prefers-reduced-motion:reduce){.fairy-divider .light{animation:none}}
