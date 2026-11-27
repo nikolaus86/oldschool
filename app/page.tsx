@@ -134,13 +134,12 @@ export default function Home() {
             </div>
 
             {/* Дракулаура */}
-            <div className="flex-1 relative hidden md:flex justify-center items-center">
-              <div className="relative w-80 h-[500px] flex items-end justify-center">
-                <img 
-                  src="/draculaura.png" 
-                  alt="Draculaura" 
-                  className="w-full h-auto object-contain drop-shadow-[0_0_30px_rgba(255,0,127,0.6)]" 
-                />
+            <div className="relative w-full max-w-[500px] h-[650px] flex items-end justify-center">
+  <img
+    src="/draculaura.png"
+    alt="Draculaura"
+    className="w-full h-full object-contain object-bottom scale-110 drop-shadow-[0_0_30px_rgba(255,0,127,0.6)]"
+  />
                 <div className="absolute top-10 right-0 bg-[#1a0b2e] border-2 border-dashed border-kiosk-cyan/50 p-3 rounded-sm text-center text-xs font-bold text-kiosk-yellow shadow-lg rotate-3">
                   <span className="text-white">№ 001</span><br/>ВЕСНА 2026<br/><span className="text-white/50 text-[10px]">ТИРАЖ: 1 ШТ.</span>
                 </div>
@@ -165,9 +164,13 @@ export default function Home() {
               
               <div className="flex-1 p-8 flex flex-col justify-center items-center bg-[#f4ecd8] relative overflow-hidden min-h-[400px]">
                 <img src="/silhouette.png" alt="Silhouette" className="absolute -bottom-8 -left-8 w-64 opacity-90 z-0 pointer-events-none" />
-                <div className="relative z-10 w-64 bg-white shadow-2xl flex items-center justify-center mb-6 rotate-2 p-1 border-2 border-gray-300 hover:rotate-0 transition-transform duration-300">
-                   <img src="/magazine-cover.jpg" alt="Magazine Cover" className="w-full h-auto" />
-                </div>
+                <div className="relative z-10 w-full max-w-[420px] bg-white shadow-2xl flex items-center justify-center mb-6 rotate-2 p-1 border-2 border-gray-300 hover:rotate-0 transition-transform duration-300">
+   <img
+     src="/magazine-cover.jpg"
+     alt="Magazine Cover"
+     className="w-full h-auto object-cover"
+   />
+</div>
                 <div className="relative z-10 bg-yellow-200 p-4 w-full max-w-xs font-bold text-center border-2 border-black -rotate-1 text-sm shadow-[3px_3px_0px_#000]">
                   «Каждый номер печатается в одном экземпляре — второго такого не будет»
                 </div>
