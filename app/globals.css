@@ -1,9 +1,13 @@
 @import "tailwindcss";
+/* kiosk custom styles */
+
 
 @theme {
+  --font-alumni: var(--font-alumni), sans-serif;
   --font-montserrat: var(--font-montserrat), sans-serif;
   --font-inter: var(--font-inter), sans-serif;
   --font-neucha: var(--font-neucha), cursive;
+  --font-anton: var(--font-alumni), sans-serif;
   
   --color-kiosk-pink: #ff007f;
   --color-kiosk-cyan: #00e5ff;
@@ -35,6 +39,13 @@ body {
   color: white;
   -webkit-text-stroke: 1.5px #2b0b3d;
   text-shadow: 3px 3px 0px #000;
+}
+
+/* Белые буквы с розовым контуром — заголовки в жёлтых окнах */
+.title-outline-pink {
+  color: #fff;
+  -webkit-text-stroke: 1.6px #ff007f;
+  text-shadow: 2px 2px 0px #000;
 }
 
 /* Клетчатый фон для бумаги */
@@ -88,6 +99,100 @@ body {
   z-index: 20;
 }
 
+/* Хвостик карточки ответа вниз */
+.answer-card::after {
+  content: '';
+  position: absolute;
+  bottom: -9px;
+  left: 26px;
+  width: 13px;
+  height: 13px;
+  background: var(--color-kiosk-yellow);
+  border-right: 2px solid #000;
+  border-bottom: 2px solid #000;
+  transform: rotate(45deg);
+  z-index: 10;
+}
+
+/* Жёлтый пузырь диалога (ответ редакции), хвостик справа снизу */
+.bubble-yellow {
+  background-color: var(--color-kiosk-yellow);
+  border: 2px solid #000;
+  border-radius: 18px;
+  position: relative;
+  color: #000;
+  box-shadow: 4px 4px 0px #000;
+}
+
+.bubble-yellow::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: 30px;
+  width: 14px;
+  height: 14px;
+  background: var(--color-kiosk-yellow);
+  border-right: 2px solid #000;
+  border-bottom: 2px solid #000;
+  transform: rotate(45deg);
+  z-index: 10;
+}
+
+
+/* Стикер-звёздочка «НОВЫЙ ВЫПУСК!» */
+.starburst {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 110px;
+  height: 110px;
+  padding: 18px;
+  background-color: var(--color-kiosk-yellow);
+  color: #000;
+  font-family: var(--font-alumni);
+  font-weight: 900;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.1;
+  text-align: center;
+  text-transform: uppercase;
+  clip-path: polygon(
+    50% 0%, 57% 10%, 68% 3%, 71% 15%, 84% 12%, 82% 25%, 96% 26%, 89% 38%,
+    100% 44%, 91% 53%, 98% 64%, 85% 66%, 88% 80%, 75% 76%, 71% 90%, 60% 82%,
+    50% 94%, 40% 82%, 29% 90%, 25% 76%, 12% 80%, 15% 66%, 2% 64%, 9% 53%,
+    0% 44%, 11% 38%, 4% 26%, 18% 25%, 16% 12%, 29% 15%, 32% 3%, 43% 10%
+  );
+}
+
+/* Маленькая звёздочка с номером выпуска */
+.starburst-sm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background-color: var(--color-kiosk-yellow);
+  color: #000;
+  font-family: var(--font-montserrat);
+  font-weight: 900;
+  font-size: 12px;
+  clip-path: polygon(
+    50% 0%, 57% 10%, 68% 3%, 71% 15%, 84% 12%, 82% 25%, 96% 26%, 89% 38%,
+    100% 44%, 91% 53%, 98% 64%, 85% 66%, 88% 80%, 75% 76%, 71% 90%, 60% 82%,
+    50% 94%, 40% 82%, 29% 90%, 25% 76%, 12% 80%, 15% 66%, 2% 64%, 9% 53%,
+    0% 44%, 11% 38%, 4% 26%, 18% 25%, 16% 12%, 29% 15%, 32% 3%, 43% 10%
+  );
+}
+
+/* Разделитель из гирлянды лампочек перед футером */
+.dots-divider {
+  height: 16px;
+  margin: 0;
+  background-image: radial-gradient(circle, var(--color-kiosk-yellow) 4px, transparent 4.5px);
+  background-size: 28px 16px;
+  background-position: center;
+  background-repeat: repeat-x;
+}
 
 /* ========= АНИМАЦИИ ПРОГРЕСС-БАРА ========= */
 

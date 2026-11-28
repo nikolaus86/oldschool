@@ -14,29 +14,49 @@ export interface MagazineParams {
 
   heroPhoto?: string;
 
-  // Данные из анкеты
+  // ШАГ 1 — ГЕРОЙ
   heroName: string;
-  universes: string[];
-  story: string;
   heroBirthdate: string;
-  giverType: string;
-  pseudonym: string;
+  pseudonym: string; // как к нему обращаешься (если хочешь)
+  relation: string; // кто он тебе
+  giverType: string; // посланник подарка
+  universes: string[];
+
+  // ШАГ 2 — ЛИЧНОСТЬ
   city: string;
   favoriteCharacter: string;
   favoriteColor: string;
   pet: string;
   uniqueness: string;
   qualities: string;
-  portraitType: string;
+  extraPhotos: string[]; // любимые / детские фото
+
+  // ШАГ 3 — ПОРТРЕТ ИЛИ ПИСЬМО
+  portraitType: string; // world | letter
   favoriteFood: string;
   favoritePlace: string;
+  favoriteSeason: string;
   favoriteHobby: string;
   personalLetter: string;
-  testType: string;
+  portraitPhotos: string[];
+
+  // ШАГ 4 — ТЕСТЫ, ИГРЫ, КОМИКС
+  testType: string; // points | arrows
+  testTopic: string;
   games: string[];
-  imageType: string;
+  gamePersonal: string; // yes | no
+  gameDetails: string;
+  story: string; // история для комикса
+
+  // ШАГ 5 — ОБРАЗЫ, ИНТЕРВЬЮ, WISHES
+  imageType: string; // playlist | cinema | style | attributes
+  playlist: string;
+  cinema: string;
+  styleNote: string;
+  attributes: string;
   interviewQuestions: string;
   wishes: string;
+  memoryPhotos: string[];
 }
 
 export const STORAGE_KEY = "magazine-params";
@@ -55,26 +75,38 @@ export const DEFAULT_PARAMS: MagazineParams = {
     "СПЕЦИАЛЬНЫЙ ВЫПУСК",
   ],
   heroPhoto: "",
-  heroName: "Саша",
-  universes: ["Монстр Хай", "Барби"],
-  story: "",
-  heroBirthdate: "12.05.2000",
+  heroName: "",
+  heroBirthdate: "",
+  pseudonym: "",
+  relation: "",
   giverType: "self",
-  pseudonym: "Санёк",
-  city: "Москва",
-  favoriteCharacter: "Барби",
-  favoriteColor: "розовый",
-  pet: "кот Барсик",
-  uniqueness: "умеет шевелить ушами",
-  qualities: "веселая, добрая, красивая",
+  universes: [],
+  city: "",
+  favoriteCharacter: "",
+  favoriteColor: "",
+  pet: "",
+  uniqueness: "",
+  qualities: "",
+  extraPhotos: [],
   portraitType: "world",
-  favoriteFood: "пицца",
-  favoritePlace: "Париж",
-  favoriteHobby: "фотографировать",
+  favoriteFood: "",
+  favoritePlace: "",
+  favoriteSeason: "",
+  favoriteHobby: "",
   personalLetter: "",
+  portraitPhotos: [],
   testType: "points",
-  games: ["Раскраска", "Кроссворд"],
+  testTopic: "",
+  games: [],
+  gamePersonal: "no",
+  gameDetails: "",
+  story: "",
   imageType: "playlist",
-  interviewQuestions: "Какая твоя мечта?",
-  wishes: "С днем рождения!",
+  playlist: "",
+  cinema: "",
+  styleNote: "",
+  attributes: "",
+  interviewQuestions: "",
+  wishes: "",
+  memoryPhotos: [],
 };
