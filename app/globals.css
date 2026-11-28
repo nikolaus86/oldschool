@@ -48,6 +48,7 @@ body {
   text-shadow: 2px 2px 0px #fff;
 }
 
+/* watch fix */
 /* Клетчатый фон для бумаги */
 .bg-grid-paper {
   background-color: var(--color-paper);
