@@ -315,7 +315,7 @@ export default function Home() {
           {/* 3. ЧТО ВНУТРИ ЖУРНАЛА */}
           <section id="inside">
 
-            <h2 className="text-center text-3xl sm:text-5xl md:text-7xl font-montserrat italic font-black text-outline-pink mb-2 uppercase">
+            <h2 className="text-center text-3xl sm:text-5xl md:text-7xl font-montserrat italic font-black text-outline-pink mb-2 uppercase tracking-tight">
               Что внутри журнала
             </h2>
 
@@ -360,7 +360,8 @@ export default function Home() {
                 ].map((pair, i) => (
                   <div key={i} className="flex flex-col relative mt-4">
 
-                    <div className="relative">
+                    {/* Вопрос — поверх карточки, чтобы диалог читался */}
+                    <div className="relative z-30">
                       {pair.first && (
                         <span className="absolute -left-4 -top-5 bg-kiosk-pink text-white text-[10px] font-black px-2 py-0.5 border border-black -rotate-6 shadow-[2px_2px_0px_#000] z-20">
                           читай всплыв!
@@ -372,8 +373,8 @@ export default function Home() {
                       </div>
                     </div>
 
-                    {/* Жёлтая карточка — одинаковый наклон */}
-                    <div className="answer-card p-5 -mt-1 ml-4 w-[90%] relative rotate-[0.75deg]">
+                    {/* Жёлтая карточка — ниже вопроса, хвостик указывает на неё */}
+                    <div className="answer-card p-5 mt-2 ml-4 w-[90%] relative rotate-[0.75deg]">
                       <div className={`absolute -right-3 -top-3 w-11 h-11 bg-kiosk-pink rounded-full border-2 border-black flex items-center justify-center text-white text-[9px] font-black text-center leading-tight ${i % 2 === 0 ? "rotate-12" : "-rotate-12"}`}>
                         {pair.badge}
                       </div>
