@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Inter, Neucha, Comfortaa } from "next/font/google";
+import { Montserrat, Inter, Neucha, Comfortaa, Rubik } from "next/font/google";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -7,6 +7,14 @@ const montserrat = Montserrat({
   style: ["normal", "italic"],
   subsets: ["latin", "cyrillic"],
   variable: "--font-montserrat",
+});
+
+// Дисплейный шрифт заголовков секций — жирный, с характером
+const rubik = Rubik({
+  weight: ["900"],
+  style: ["normal", "italic"],
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-rubik",
 });
 
 // Округлый геометрический шрифт — вопросы в диалогах и подзаголовки
@@ -38,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru" className={`${montserrat.variable} ${inter.variable} ${neucha.variable} ${comfortaa.variable}`}>
+    <html lang="ru" className={`${montserrat.variable} ${inter.variable} ${neucha.variable} ${comfortaa.variable} ${rubik.variable}`}>
       <body className="bg-[#1a0b2e] text-white font-inter antialiased min-h-screen selection:bg-pink-500 selection:text-white">
         {children}
       </body>

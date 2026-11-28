@@ -4,6 +4,7 @@
 
 @theme {
   --font-comfortaa: var(--font-comfortaa), sans-serif;
+  --font-rubik: var(--font-rubik), sans-serif; /* rubik token */
   --font-montserrat: var(--font-montserrat), sans-serif;
   --font-inter: var(--font-inter), sans-serif;
   --font-neucha: var(--font-neucha), cursive;

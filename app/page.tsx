@@ -252,7 +252,7 @@ export default function Home() {
 
               <div className="flex-1 min-w-0 p-5 sm:p-8 md:p-12 relative border-b-4 md:border-b-0 md:border-r-4 border-gray-300 bg-grid-paper">
 
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-montserrat italic font-black text-kiosk-purple uppercase mb-6 leading-tight">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-rubik italic font-black text-kiosk-purple uppercase mb-6 leading-tight">
                   Мы вернули те самые журналы
                 </h2>
 
@@ -315,7 +315,7 @@ export default function Home() {
           {/* 3. ЧТО ВНУТРИ ЖУРНАЛА */}
           <section id="inside">
 
-            <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-montserrat italic font-black text-outline-pink mb-2 uppercase tracking-tight">
+            <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-rubik italic font-black text-outline-pink mb-2 uppercase tracking-tight">
               Что внутри журнала
             </h2>
 
@@ -421,7 +421,7 @@ export default function Home() {
           {/* 4. КАК ЗАКАЗАТЬ */}
           <section id="how">
 
-            <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-montserrat italic font-black text-outline-cyan mb-12 md:mb-16 uppercase">
+            <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-rubik italic font-black text-outline-cyan mb-12 md:mb-16 uppercase">
               Как заказать свой номер?
             </h2>
 
@@ -500,7 +500,7 @@ export default function Home() {
           {/* 5. ЦЕНА */}
           <section id="price">
 
-            <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-montserrat italic font-black text-outline-cyan mb-3 uppercase">
+            <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-rubik italic font-black text-outline-cyan mb-3 uppercase">
               Цена
             </h2>
 
@@ -681,7 +681,7 @@ export default function Home() {
           {/* 6. ВЫПУСКИ */}
           <section id="issues">
 
-            <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-montserrat italic font-black text-outline-pink mb-3 uppercase">
+            <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-rubik italic font-black text-outline-pink mb-3 uppercase">
               Наши выпуски
             </h2>
 
@@ -814,7 +814,7 @@ export default function Home() {
 
             <div className="w-full max-w-4xl mx-auto text-center mb-8 md:mb-10">
 
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-montserrat italic font-black text-outline-pink uppercase mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-rubik italic font-black text-outline-pink uppercase mb-4">
                 Анкета будущего номера
               </h2>
 
