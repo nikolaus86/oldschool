@@ -1,73 +1,73 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useCallback } from "react";
 
 type OrderStatus = "new" | "accepted" | "rejected";
 
 const STATUS_META: Record<OrderStatus, { label: string; badge: string }> = {
-  new: { label: "Новый", badge: "bg-kiosk-cyan text-black" },
-  accepted: { label: "В работе", badge: "bg-green-400 text-black" },
-  rejected: { label: "Отклонён", badge: "bg-red-400 text-black" },
+  new: { label: "РќРѕРІС‹Р№", badge: "bg-kiosk-cyan text-black" },
+  accepted: { label: "Р’ СЂР°Р±РѕС‚Рµ", badge: "bg-green-400 text-black" },
+  rejected: { label: "РћС‚РєР»РѕРЅС‘РЅ", badge: "bg-red-400 text-black" },
 };
 
 const FILTERS: { key: "all" | OrderStatus; label: string }[] = [
-  { key: "all", label: "Все" },
-  { key: "new", label: "Новые" },
-  { key: "accepted", label: "В работе" },
-  { key: "rejected", label: "Отклонённые" },
+  { key: "all", label: "Р’СЃРµ" },
+  { key: "new", label: "РќРѕРІС‹Рµ" },
+  { key: "accepted", label: "Р’ СЂР°Р±РѕС‚Рµ" },
+  { key: "rejected", label: "РћС‚РєР»РѕРЅС‘РЅРЅС‹Рµ" },
 ];
 
-// Как показывать поля анкеты в модалке
+// РљР°Рє РїРѕРєР°Р·С‹РІР°С‚СЊ РїРѕР»СЏ Р°РЅРєРµС‚С‹ РІ РјРѕРґР°Р»РєРµ
 const FIELD_LABELS: Record<string, string> = {
-  relation: "Кто он тебе",
-  pseudonym: "Как к нему обращаться",
-  heroBirthdate: "Дата рождения",
-  giverType: "Посланник подарка",
-  universes: "Вселенные",
-  city: "Город",
-  favoriteCharacter: "Любимый персонаж",
-  favoriteColor: "Любимый цвет",
-  pet: "Питомец",
-  uniqueness: "Что в нём особенного",
-  qualities: "Качества",
-  favoriteFood: "Любимая еда / напиток",
-  favoritePlace: "Любимое место",
-  favoriteSeason: "Любимое время года",
-  favoriteHobby: "Любимое хобби",
-  personalLetter: "Письмо герою",
-  testType: "Тип теста",
-  testTopic: "Тема теста",
-  games: "Игры",
-  gamePersonal: "Личные детали в играх",
-  gameDetails: "Детали для игр",
-  story: "История для комикса",
-  playlist: "Плейлист (5 треков)",
-  cinema: "Кино (5 фильмов)",
-  styleNote: "Стиль и образ",
-  attributes: "Личные атрибуты",
-  interviewQuestions: "Вопросы для интервью",
-  wishes: "Пожелания (wishes)",
+  relation: "РљС‚Рѕ РѕРЅ С‚РµР±Рµ",
+  pseudonym: "РљР°Рє Рє РЅРµРјСѓ РѕР±СЂР°С‰Р°С‚СЊСЃСЏ",
+  heroBirthdate: "Р”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ",
+  giverType: "РџРѕСЃР»Р°РЅРЅРёРє РїРѕРґР°СЂРєР°",
+  universes: "Р’СЃРµР»РµРЅРЅС‹Рµ",
+  city: "Р“РѕСЂРѕРґ",
+  favoriteCharacter: "Р›СЋР±РёРјС‹Р№ РїРµСЂСЃРѕРЅР°Р¶",
+  favoriteColor: "Р›СЋР±РёРјС‹Р№ С†РІРµС‚",
+  pet: "РџРёС‚РѕРјРµС†",
+  uniqueness: "Р§С‚Рѕ РІ РЅС‘Рј РѕСЃРѕР±РµРЅРЅРѕРіРѕ",
+  qualities: "РљР°С‡РµСЃС‚РІР°",
+  favoriteFood: "Р›СЋР±РёРјР°СЏ РµРґР° / РЅР°РїРёС‚РѕРє",
+  favoritePlace: "Р›СЋР±РёРјРѕРµ РјРµСЃС‚Рѕ",
+  favoriteSeason: "Р›СЋР±РёРјРѕРµ РІСЂРµРјСЏ РіРѕРґР°",
+  favoriteHobby: "Р›СЋР±РёРјРѕРµ С…РѕР±Р±Рё",
+  personalLetter: "РџРёСЃСЊРјРѕ РіРµСЂРѕСЋ",
+  testType: "РўРёРї С‚РµСЃС‚Р°",
+  testTopic: "РўРµРјР° С‚РµСЃС‚Р°",
+  games: "РРіСЂС‹",
+  gamePersonal: "Р›РёС‡РЅС‹Рµ РґРµС‚Р°Р»Рё РІ РёРіСЂР°С…",
+  gameDetails: "Р”РµС‚Р°Р»Рё РґР»СЏ РёРіСЂ",
+  story: "РСЃС‚РѕСЂРёСЏ РґР»СЏ РєРѕРјРёРєСЃР°",
+  playlist: "РџР»РµР№Р»РёСЃС‚ (5 С‚СЂРµРєРѕРІ)",
+  cinema: "РљРёРЅРѕ (5 С„РёР»СЊРјРѕРІ)",
+  styleNote: "РЎС‚РёР»СЊ Рё РѕР±СЂР°Р·",
+  attributes: "Р›РёС‡РЅС‹Рµ Р°С‚СЂРёР±СѓС‚С‹",
+  interviewQuestions: "Р’РѕРїСЂРѕСЃС‹ РґР»СЏ РёРЅС‚РµСЂРІСЊСЋ",
+  wishes: "РџРѕР¶РµР»Р°РЅРёСЏ (wishes)",
 };
 
 const VALUE_FORMATTERS: Record<string, (v: any) => string> = {
-  giverType: (v) => (v === "self" ? "От себя" : v === "friends" ? "От компании / друзей" : v || "—"),
-  portraitType: (v) => (v === "world" ? "«Маленький мир героя»" : "«Письмо тебе»"),
-  testType: (v) => (v === "points" ? "С баллами" : v === "arrows" ? "«Стрелочки»" : v || "—"),
-  gamePersonal: (v) => (v === "yes" ? "Да, с личными деталями" : "Нет, универсальные"),
+  giverType: (v) => (v === "self" ? "РћС‚ СЃРµР±СЏ" : v === "friends" ? "РћС‚ РєРѕРјРїР°РЅРёРё / РґСЂСѓР·РµР№" : v || "вЂ”"),
+  portraitType: (v) => (v === "world" ? "В«РњР°Р»РµРЅСЊРєРёР№ РјРёСЂ РіРµСЂРѕСЏВ»" : "В«РџРёСЃСЊРјРѕ С‚РµР±РµВ»"),
+  testType: (v) => (v === "points" ? "РЎ Р±Р°Р»Р»Р°РјРё" : v === "arrows" ? "В«РЎС‚СЂРµР»РѕС‡РєРёВ»" : v || "вЂ”"),
+  gamePersonal: (v) => (v === "yes" ? "Р”Р°, СЃ Р»РёС‡РЅС‹РјРё РґРµС‚Р°Р»СЏРјРё" : "РќРµС‚, СѓРЅРёРІРµСЂСЃР°Р»СЊРЅС‹Рµ"),
   imageType: (v) =>
     ({
-      playlist: "Плейлист",
-      cinema: "Кино",
-      style: "Стиль и образ",
-      attributes: "Личные атрибуты",
-    } as Record<string, string>)[v] || v || "—",
+      playlist: "РџР»РµР№Р»РёСЃС‚",
+      cinema: "РљРёРЅРѕ",
+      style: "РЎС‚РёР»СЊ Рё РѕР±СЂР°Р·",
+      attributes: "Р›РёС‡РЅС‹Рµ Р°С‚СЂРёР±СѓС‚С‹",
+    } as Record<string, string>)[v] || v || "вЂ”",
 };
 
 const PHOTO_SECTIONS: { key: string; label: string }[] = [
-  { key: "heroPhoto", label: "Фото для обложки" },
-  { key: "extraPhotos", label: "Любимые / детские фото" },
-  { key: "portraitPhotos", label: "Фото из «Портрета»" },
-  { key: "memoryPhotos", label: "Памятные фото" },
+  { key: "heroPhoto", label: "Р¤РѕС‚Рѕ РґР»СЏ РѕР±Р»РѕР¶РєРё" },
+  { key: "extraPhotos", label: "Р›СЋР±РёРјС‹Рµ / РґРµС‚СЃРєРёРµ С„РѕС‚Рѕ" },
+  { key: "portraitPhotos", label: "Р¤РѕС‚Рѕ РёР· В«РџРѕСЂС‚СЂРµС‚Р°В»" },
+  { key: "memoryPhotos", label: "РџР°РјСЏС‚РЅС‹Рµ С„РѕС‚Рѕ" },
 ];
 
 export default function AdminPage() {
@@ -83,7 +83,7 @@ export default function AdminPage() {
   const fetchOrders = useCallback(async () => {
     setLoading(true);
     try {
-      // light=1 — без base64-фото, список грузится быстро
+      // light=1 вЂ” Р±РµР· base64-С„РѕС‚Рѕ, СЃРїРёСЃРѕРє РіСЂСѓР·РёС‚СЃСЏ Р±С‹СЃС‚СЂРѕ
       const res = await fetch("/api/orders?light=1");
       const data = await res.json();
       setOrders(Array.isArray(data) ? data : []);
@@ -98,17 +98,17 @@ export default function AdminPage() {
     if (isAuth) fetchOrders();
   }, [isAuth, fetchOrders]);
 
-  // Вход
+  // Р’С…РѕРґ
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (password === "admin") {
       setIsAuth(true);
     } else {
-      alert("Неверный пароль (подсказка: admin)");
+      alert("РќРµРІРµСЂРЅС‹Р№ РїР°СЂРѕР»СЊ (РїРѕРґСЃРєР°Р·РєР°: admin)");
     }
   };
 
-  // Принять / отклонить заказ
+  // РџСЂРёРЅСЏС‚СЊ / РѕС‚РєР»РѕРЅРёС‚СЊ Р·Р°РєР°Р·
   const setOrderStatus = async (id: number, status: OrderStatus) => {
     setUpdatingId(id);
     try {
@@ -120,19 +120,19 @@ export default function AdminPage() {
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
-        throw new Error(err.error || "Не удалось обновить статус");
+        throw new Error(err.error || "РќРµ СѓРґР°Р»РѕСЃСЊ РѕР±РЅРѕРІРёС‚СЊ СЃС‚Р°С‚СѓСЃ");
       }
 
       setOrders((prev) => prev.map((o) => (o.id === id ? { ...o, status } : o)));
       setSelectedOrder((prev: any) => (prev && prev.id === id ? { ...prev, status } : prev));
     } catch (e: any) {
-      alert(e.message || "Ошибка обновления статуса");
+      alert(e.message || "РћС€РёР±РєР° РѕР±РЅРѕРІР»РµРЅРёСЏ СЃС‚Р°С‚СѓСЃР°");
     } finally {
       setUpdatingId(null);
     }
   };
 
-  // Открыть полную анкету (с фото)
+  // РћС‚РєСЂС‹С‚СЊ РїРѕР»РЅСѓСЋ Р°РЅРєРµС‚Сѓ (СЃ С„РѕС‚Рѕ)
   const openOrder = async (id: number) => {
     setOpeningId(id);
     try {
@@ -141,7 +141,7 @@ export default function AdminPage() {
       setSelectedOrder(data);
     } catch (e) {
       console.error(e);
-      alert("Не удалось загрузить анкету");
+      alert("РќРµ СѓРґР°Р»РѕСЃСЊ Р·Р°РіСЂСѓР·РёС‚СЊ Р°РЅРєРµС‚Сѓ");
     } finally {
       setOpeningId(null);
     }
@@ -151,16 +151,16 @@ export default function AdminPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#1a0b2e] p-4 text-white">
         <form onSubmit={handleLogin} className="bg-grid-paper text-black p-8 rounded-lg shadow-[8px_8px_0px_#ff007f] max-w-sm w-full border-4 border-black rotate-1">
-          <h1 className="text-3xl font-montserrat italic font-black uppercase text-center mb-6">Вход в редакцию</h1>
+          <h1 className="text-3xl font-montserrat italic font-black uppercase text-center mb-6">Р’С…РѕРґ РІ СЂРµРґР°РєС†РёСЋ</h1>
           <input
             type="password"
-            placeholder="Пароль"
+            placeholder="РџР°СЂРѕР»СЊ"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full px-4 py-2 border-2 border-dashed border-gray-400 rounded bg-white/50 mb-4 focus:outline-none focus:border-kiosk-pink"
           />
           <button type="submit" className="w-full bg-kiosk-pink text-white font-bold py-2 rounded border-2 border-black shadow-[3px_3px_0px_#000] uppercase">
-            Войти
+            Р’РѕР№С‚Рё
           </button>
         </form>
       </div>
@@ -198,7 +198,7 @@ export default function AdminPage() {
                 : "bg-green-400/90 hover:bg-green-400 shadow-[3px_3px_0px_#000] hover:translate-y-0.5 hover:shadow-none"
             } disabled:opacity-60`}
           >
-            {busy ? "..." : "Принять"}
+            {busy ? "..." : "РџСЂРёРЅСЏС‚СЊ"}
           </button>
           <button
             onClick={() => setOrderStatus(order.id, "rejected")}
@@ -209,7 +209,7 @@ export default function AdminPage() {
                 : "bg-gray-200 hover:bg-red-300"
             } disabled:opacity-60`}
           >
-            Отклонить
+            РћС‚РєР»РѕРЅРёС‚СЊ
           </button>
         </div>
         {status !== "new" && (
@@ -218,7 +218,7 @@ export default function AdminPage() {
             disabled={busy}
             className="w-full mt-2 text-[11px] font-bold text-gray-500 hover:text-black uppercase underline underline-offset-2 disabled:opacity-50"
           >
-            ↺ Вернуть в новые
+            в†є Р’РµСЂРЅСѓС‚СЊ РІ РЅРѕРІС‹Рµ
           </button>
         )}
       </div>
@@ -229,16 +229,16 @@ export default function AdminPage() {
     <div className="min-h-screen bg-[#1a0b2e] text-white p-6 md:p-12 font-inter">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-wrap gap-4 justify-between items-center mb-8 border-b-2 border-white/20 pb-4">
-          <h1 className="text-4xl font-montserrat italic font-black text-kiosk-yellow uppercase">Панель редакции</h1>
+          <h1 className="text-4xl font-montserrat italic font-black text-kiosk-yellow uppercase">РџР°РЅРµР»СЊ СЂРµРґР°РєС†РёРё</h1>
           <div className="flex gap-4 items-center">
             <button onClick={fetchOrders} className="text-sm font-bold text-kiosk-cyan hover:underline">
-              ⟳ Обновить
+              вџі РћР±РЅРѕРІРёС‚СЊ
             </button>
-            <button onClick={() => setIsAuth(false)} className="text-sm font-bold text-white/50 hover:text-white">Выйти</button>
+            <button onClick={() => setIsAuth(false)} className="text-sm font-bold text-white/50 hover:text-white">Р’С‹Р№С‚Рё</button>
           </div>
         </div>
 
-        {/* Фильтры по статусам */}
+        {/* Р¤РёР»СЊС‚СЂС‹ РїРѕ СЃС‚Р°С‚СѓСЃР°Рј */}
         <div className="flex flex-wrap gap-2 mb-8">
           {FILTERS.map((f) => (
             <button
@@ -256,13 +256,13 @@ export default function AdminPage() {
         </div>
 
         {loading ? (
-          <p className="text-center text-white/50 animate-pulse py-16">Загрузка заказов...</p>
+          <p className="text-center text-white/50 animate-pulse py-16">Р—Р°РіСЂСѓР·РєР° Р·Р°РєР°Р·РѕРІ...</p>
         ) : visibleOrders.length === 0 ? (
           <div className="text-center py-20 bg-white/5 rounded-xl border-2 border-dashed border-white/20">
             <p className="text-xl font-bold text-white/50">
-              {filter === "all" ? "Пока нет новых заказов" : "В этой категории пусто"}
+              {filter === "all" ? "РџРѕРєР° РЅРµС‚ РЅРѕРІС‹С… Р·Р°РєР°Р·РѕРІ" : "Р’ СЌС‚РѕР№ РєР°С‚РµРіРѕСЂРёРё РїСѓСЃС‚Рѕ"}
             </p>
-            <p className="text-sm text-white/30 mt-2">Заполните анкету на главной странице, чтобы проверить работу.</p>
+            <p className="text-sm text-white/30 mt-2">Р—Р°РїРѕР»РЅРёС‚Рµ Р°РЅРєРµС‚Сѓ РЅР° РіР»Р°РІРЅРѕР№ СЃС‚СЂР°РЅРёС†Рµ, С‡С‚РѕР±С‹ РїСЂРѕРІРµСЂРёС‚СЊ СЂР°Р±РѕС‚Сѓ.</p>
           </div>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -281,21 +281,21 @@ export default function AdminPage() {
                   </div>
 
                   <h2 className="text-2xl font-montserrat italic font-black uppercase mb-1">
-                    {order.heroName || "Без имени"}
+                    {order.heroName || "Р‘РµР· РёРјРµРЅРё"}
                   </h2>
                   <p className="text-sm font-bold text-gray-600 mb-3">
-                    Выпуск: {order.issue || "Не указан"}
+                    Р’С‹РїСѓСЃРє: {order.issue || "РќРµ СѓРєР°Р·Р°РЅ"}
                   </p>
 
                   <div className="space-y-1 text-xs mb-4">
-                    <p><strong>Кто он тебе:</strong> {order.relation || "—"}</p>
-                    <p><strong>Вселенные:</strong> {order.universes?.join(", ") || "Нет"}</p>
-                    <p><strong>Подарок от:</strong> {order.giverType === "self" ? "Себя" : "Друзей"}</p>
+                    <p><strong>РљС‚Рѕ РѕРЅ С‚РµР±Рµ:</strong> {order.relation || "вЂ”"}</p>
+                    <p><strong>Р’СЃРµР»РµРЅРЅС‹Рµ:</strong> {order.universes?.join(", ") || "РќРµС‚"}</p>
+                    <p><strong>РџРѕРґР°СЂРѕРє РѕС‚:</strong> {order.giverType === "self" ? "РЎРµР±СЏ" : "Р”СЂСѓР·РµР№"}</p>
                   </div>
 
                   {status !== "new" && (
                     <p className="text-[11px] font-bold text-gray-400 mb-2 uppercase">
-                      Анкета обработана
+                      РђРЅРєРµС‚Р° РѕР±СЂР°Р±РѕС‚Р°РЅР°
                     </p>
                   )}
 
@@ -304,7 +304,7 @@ export default function AdminPage() {
                     disabled={openingId === order.id}
                     className="w-full bg-black text-white text-xs font-bold py-2 rounded uppercase hover:bg-gray-800 transition mb-3 disabled:opacity-50"
                   >
-                    {openingId === order.id ? "Загрузка..." : "Открыть всю анкету"}
+                    {openingId === order.id ? "Р—Р°РіСЂСѓР·РєР°..." : "РћС‚РєСЂС‹С‚СЊ РІСЃСЋ Р°РЅРєРµС‚Сѓ"}
                   </button>
 
                   <ActionButtons order={order} />
@@ -315,7 +315,7 @@ export default function AdminPage() {
         )}
       </div>
 
-      {/* Модалка с полной анкетой */}
+      {/* РњРѕРґР°Р»РєР° СЃ РїРѕР»РЅРѕР№ Р°РЅРєРµС‚РѕР№ */}
       {selectedOrder && (
         <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" onClick={() => setSelectedOrder(null)}>
           <div
@@ -324,9 +324,9 @@ export default function AdminPage() {
           >
             <div className="flex justify-between items-center mb-2 border-b-2 border-gray-300 pb-2">
               <h2 className="text-2xl md:text-3xl font-montserrat italic font-black uppercase text-kiosk-pink">
-                Анкета: {selectedOrder.heroName || "без имени"}
+                РђРЅРєРµС‚Р°: {selectedOrder.heroName || "Р±РµР· РёРјРµРЅРё"}
               </h2>
-              <button onClick={() => setSelectedOrder(null)} className="text-gray-500 hover:text-black font-black text-xl">✕</button>
+              <button onClick={() => setSelectedOrder(null)} className="text-gray-500 hover:text-black font-black text-xl">вњ•</button>
             </div>
 
             <div className="flex items-center gap-3 mb-6">
@@ -334,7 +334,7 @@ export default function AdminPage() {
               <StatusBadge status={selectedOrder.status || "new"} />
             </div>
 
-            {/* Поля анкеты */}
+            {/* РџРѕР»СЏ Р°РЅРєРµС‚С‹ */}
             <div className="space-y-2 text-sm">
               {Object.entries(FIELD_LABELS).map(([key, label]) => {
                 const value = selectedOrder[key];
@@ -356,7 +356,7 @@ export default function AdminPage() {
               })}
             </div>
 
-            {/* Фото */}
+            {/* Р¤РѕС‚Рѕ */}
             {PHOTO_SECTIONS.map(({ key, label }) => {
               const value = selectedOrder[key];
               const photos = Array.isArray(value) ? value : value ? [value] : [];
@@ -370,7 +370,7 @@ export default function AdminPage() {
                       <a key={i} href={src} target="_blank" rel="noopener noreferrer">
                         <img
                           src={src}
-                          alt={`${label} — ${i + 1}`}
+                          alt={`${label} вЂ” ${i + 1}`}
                           className="w-20 h-20 object-cover border-2 border-black rounded hover:scale-105 transition-transform"
                         />
                       </a>
@@ -380,7 +380,7 @@ export default function AdminPage() {
               );
             })}
 
-            {/* Действия */}
+            {/* Р”РµР№СЃС‚РІРёСЏ */}
             <div className="mt-8 flex gap-4">
               <ActionButtons order={selectedOrder} compact />
             </div>

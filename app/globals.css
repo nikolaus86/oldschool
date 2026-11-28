@@ -3,11 +3,10 @@
 
 
 @theme {
-  --font-alumni: var(--font-alumni), sans-serif;
   --font-montserrat: var(--font-montserrat), sans-serif;
   --font-inter: var(--font-inter), sans-serif;
   --font-neucha: var(--font-neucha), cursive;
-  --font-anton: var(--font-alumni), sans-serif;
+  --font-anton: var(--font-montserrat), sans-serif;
   
   --color-kiosk-pink: #ff007f;
   --color-kiosk-cyan: #00e5ff;
@@ -97,6 +96,7 @@ body {
   box-shadow: 4px 4px 0px #000;
   position: relative;
   z-index: 20;
+  color: #000;
 }
 
 /* Хвостик карточки ответа вниз */
@@ -149,10 +149,10 @@ body {
   padding: 18px;
   background-color: var(--color-kiosk-yellow);
   color: #000;
-  font-family: var(--font-alumni);
+  font-family: var(--font-montserrat);
   font-weight: 900;
   font-style: italic;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.1;
   text-align: center;
   text-transform: uppercase;

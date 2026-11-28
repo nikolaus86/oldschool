@@ -69,7 +69,7 @@ export default function Home() {
 
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-cyan-400/80 rotate-2 shadow-sm z-10" />
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-alumni italic font-black text-kiosk-purple uppercase mb-4 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-montserrat italic font-black text-kiosk-purple uppercase mb-4 leading-tight">
               Заказ отправлен!
             </h2>
 
@@ -85,7 +85,7 @@ export default function Home() {
 
             <button
               onClick={() => setIsOrdered(false)}
-              className="bg-kiosk-pink text-white font-alumni italic font-black text-lg px-8 py-3 rounded-full border-2 border-black shadow-[4px_4px_0px_#000] hover:translate-y-1 hover:shadow-[2px_2px_0px_#000] transition-all uppercase"
+              className="bg-kiosk-pink text-white font-montserrat italic font-black text-lg px-8 py-3 rounded-full border-2 border-black shadow-[4px_4px_0px_#000] hover:translate-y-1 hover:shadow-[2px_2px_0px_#000] transition-all uppercase"
             >
               Отлично!
             </button>
@@ -109,18 +109,18 @@ export default function Home() {
 
         <a
           href="#form"
-          className="bg-kiosk-pink text-white font-alumni italic font-black text-sm sm:text-base px-4 sm:px-6 py-2 rounded-full border-2 border-white shadow-[3px_3px_0px_#000] uppercase text-center"
+          className="bg-kiosk-pink text-white font-montserrat italic font-black text-sm sm:text-base px-4 sm:px-6 py-2 rounded-full border-2 border-white shadow-[3px_3px_0px_#000] uppercase text-center"
         >
           Заполнить анкету
         </a>
       </header>
 
-      {/* ОСНОВНОЙ КОНТЕЙНЕР */}
-      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 pt-24 pb-12 md:pb-20 flex gap-12">
+      {/* ОСНОВНОЙ КОНТЕЙНЕР — контент всегда по центру */}
+      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 pt-24 pb-12 md:pb-20 flex justify-center gap-12">
 
-        {/* ЛЕВОЕ МЕНЮ */}
-        <aside className="hidden lg:block w-56 shrink-0">
-          <nav className="sticky top-28 flex flex-col gap-6 font-alumni italic font-black text-2xl uppercase tracking-tight">
+        {/* ЛЕВОЕ МЕНЮ — только на очень широких экранах */}
+        <aside className="hidden 2xl:block w-44 shrink-0">
+          <nav className="sticky top-28 flex flex-col gap-6 font-montserrat italic font-black text-2xl uppercase tracking-tight">
 
             {menuItems.map((item) => (
               <a
@@ -143,7 +143,7 @@ export default function Home() {
         </aside>
 
         {/* ОСНОВНОЙ КОНТЕНТ */}
-        <div className="flex-1 min-w-0 max-w-5xl space-y-20 md:space-y-32">
+        <div className="w-full max-w-5xl min-w-0 mx-auto space-y-16 md:space-y-24">
 
           {/* 1. HERO */}
           <section
@@ -166,7 +166,7 @@ export default function Home() {
                     y="80"
                     textLength="322"
                     lengthAdjust="spacingAndGlyphs"
-                    className="font-alumni italic font-black uppercase"
+                    className="font-montserrat italic font-black uppercase"
                     style={{
                       fontSize: "92px",
                       fill: "#ffffff",
@@ -197,14 +197,14 @@ export default function Home() {
 
                 <a
                   href="#form"
-                  className="bg-kiosk-pink text-white font-alumni italic font-black text-base px-6 sm:px-8 py-3 rounded-full border-2 border-white shadow-[4px_4px_0px_#000] hover:-translate-y-1 transition-all text-center"
+                  className="bg-kiosk-pink text-white font-montserrat italic font-black text-base px-6 sm:px-8 py-3 rounded-full border-2 border-white shadow-[4px_4px_0px_#000] hover:-translate-y-1 transition-all text-center"
                 >
                   СОБРАТЬ СВОЙ ВЫПУСК
                 </a>
 
                 <a
                   href="#issues"
-                  className="bg-[#2a1245] text-kiosk-yellow font-alumni italic font-black text-base px-6 sm:px-8 py-3 rounded-full border-2 border-white shadow-[4px_4px_0px_#000] hover:-translate-y-1 transition-all text-center"
+                  className="bg-[#2a1245] text-kiosk-yellow font-montserrat italic font-black text-base px-6 sm:px-8 py-3 rounded-full border-2 border-white shadow-[4px_4px_0px_#000] hover:-translate-y-1 transition-all text-center"
                 >
                   ПОСМОТРЕТЬ НОМЕРА
                 </a>
@@ -252,7 +252,7 @@ export default function Home() {
 
               <div className="flex-1 min-w-0 p-5 sm:p-8 md:p-12 relative border-b-4 md:border-b-0 md:border-r-4 border-gray-300 bg-grid-paper">
 
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-alumni italic font-black text-kiosk-purple uppercase mb-6 leading-tight">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-montserrat italic font-black text-kiosk-purple uppercase mb-6 leading-tight">
                   Мы вернули те самые журналы
                 </h2>
 
@@ -306,7 +306,7 @@ export default function Home() {
 
             {/* Розовый баннер под разворотом — как в референсе */}
             <div className="mt-8 md:mt-10 flex justify-center px-2">
-              <div className="bg-kiosk-pink text-white font-alumni italic font-black text-lg sm:text-xl md:text-2xl uppercase text-center leading-snug px-6 sm:px-10 py-4 sm:py-5 max-w-2xl border-2 border-black shadow-[8px_8px_0px_rgba(0,0,0,0.35)] -rotate-1">
+              <div className="bg-kiosk-pink text-white font-montserrat italic font-black text-lg sm:text-xl md:text-2xl uppercase text-center leading-snug px-6 sm:px-10 py-4 sm:py-5 max-w-2xl border-2 border-black shadow-[8px_8px_0px_rgba(0,0,0,0.35)] -rotate-1">
                 Не лента, не сторис, не скриншот — а журнал, который можно поставить на полку
               </div>
             </div>
@@ -315,11 +315,11 @@ export default function Home() {
           {/* 3. ЧТО ВНУТРИ ЖУРНАЛА */}
           <section id="inside">
 
-            <h2 className="text-center text-3xl sm:text-5xl md:text-7xl font-alumni italic font-black text-outline-pink mb-4 uppercase">
+            <h2 className="text-center text-3xl sm:text-5xl md:text-7xl font-montserrat italic font-black text-outline-pink mb-2 uppercase">
               Что внутри журнала
             </h2>
 
-            <p className="text-center text-kiosk-cyan italic font-bold text-sm mb-10 md:mb-12">
+            <p className="text-center text-kiosk-cyan italic font-bold text-sm mb-6 md:mb-8">
               Открываешь журнал — и начинается диалог…
             </p>
 
@@ -366,19 +366,19 @@ export default function Home() {
                           читай всплыв!
                         </span>
                       )}
-                      {/* Голубые окошки — поменьше, наклон в разные стороны */}
-                      <div className={`bubble-cyan px-4 py-2 font-bold text-sm md:text-base w-[85%] ${i % 2 === 0 ? "-rotate-1" : "rotate-1"}`}>
+                      {/* Голубые окошки — поменьше, все с одинаковым наклоном, текст курсивом */}
+                      <div className="bubble-cyan px-4 py-2 font-bold italic text-sm md:text-base w-[85%] -rotate-1">
                         {pair.q}
                       </div>
                     </div>
 
-                    {/* Жёлтая карточка — наклон в противоположную сторону */}
-                    <div className={`answer-card p-5 -mt-1 ml-4 w-[90%] relative ${i % 2 === 0 ? "rotate-[0.75deg]" : "-rotate-[0.75deg]"}`}>
+                    {/* Жёлтая карточка — одинаковый наклон */}
+                    <div className="answer-card p-5 -mt-1 ml-4 w-[90%] relative rotate-[0.75deg]">
                       <div className={`absolute -right-3 -top-3 w-11 h-11 bg-kiosk-pink rounded-full border-2 border-black flex items-center justify-center text-white text-[9px] font-black text-center leading-tight ${i % 2 === 0 ? "rotate-12" : "-rotate-12"}`}>
                         {pair.badge}
                       </div>
 
-                      <h3 className="title-outline-pink font-alumni italic font-black text-xl mb-1 uppercase inline-block -skew-x-6">
+                      <h3 className="title-outline-pink font-montserrat italic font-black text-xl mb-1 uppercase inline-block -skew-x-6">
                         {pair.title}
                       </h3>
 
@@ -399,13 +399,16 @@ export default function Home() {
 
               <div className="mt-8 md:mt-10 flex flex-col md:flex-row items-center justify-center gap-6 border-t-2 border-dashed border-gray-400 pt-8">
 
-                <p className="font-alumni italic font-black text-lg sm:text-xl md:text-2xl text-kiosk-yellow text-outline-purple text-center uppercase">
+                <p
+                  className="font-montserrat italic font-black text-xl sm:text-2xl md:text-3xl text-kiosk-yellow text-center uppercase inline-block -skew-x-[10deg]"
+                  style={{ textShadow: "2px 2px 0px #000" }}
+                >
                   Хватит читать — пора делать свой номер!
                 </p>
 
                 <a
                   href="#form"
-                  className="bg-kiosk-pink text-white font-alumni italic font-black text-base px-6 py-3 rounded-full border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-y-1 hover:shadow-none transition-all uppercase text-center"
+                  className="bg-kiosk-pink text-white font-montserrat italic font-black text-base px-6 py-3 rounded-full border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-y-1 hover:shadow-none transition-all uppercase text-center"
                 >
                   Заполнить анкету
                 </a>
@@ -417,7 +420,7 @@ export default function Home() {
           {/* 4. КАК ЗАКАЗАТЬ */}
           <section id="how">
 
-            <h2 className="text-center text-3xl sm:text-5xl md:text-6xl font-alumni italic font-black text-outline-cyan mb-12 md:mb-16 uppercase">
+            <h2 className="text-center text-3xl sm:text-5xl md:text-6xl font-montserrat italic font-black text-outline-cyan mb-12 md:mb-16 uppercase">
               Как заказать свой номер?
             </h2>
 
@@ -479,7 +482,7 @@ export default function Home() {
                     </div>
                   )}
 
-                  <h3 className="font-alumni italic font-black text-lg mb-2 text-center">
+                  <h3 className="font-montserrat italic font-black text-lg mb-2 text-center">
                     {step.title}
                   </h3>
 
@@ -496,7 +499,7 @@ export default function Home() {
           {/* 5. ЦЕНА */}
           <section id="price">
 
-            <h2 className="text-center text-3xl sm:text-5xl md:text-6xl font-alumni italic font-black text-outline-cyan mb-3 uppercase">
+            <h2 className="text-center text-3xl sm:text-5xl md:text-6xl font-montserrat italic font-black text-outline-cyan mb-3 uppercase">
               Цена
             </h2>
 
@@ -544,7 +547,7 @@ export default function Home() {
 
                   <a
                     href="#form"
-                    className="w-max bg-white text-black font-alumni italic font-black text-sm uppercase px-6 py-2.5 rounded-full border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-y-0.5 hover:shadow-none transition-all"
+                    className="w-max bg-white text-black font-montserrat italic font-black text-sm uppercase px-6 py-2.5 rounded-full border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-y-0.5 hover:shadow-none transition-all"
                   >
                     Выбрать
                   </a>
@@ -594,7 +597,7 @@ export default function Home() {
 
                   <a
                     href="#form"
-                    className="w-max bg-white text-black font-alumni italic font-black text-sm uppercase px-6 py-2.5 rounded-full border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-y-0.5 hover:shadow-none transition-all"
+                    className="w-max bg-white text-black font-montserrat italic font-black text-sm uppercase px-6 py-2.5 rounded-full border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-y-0.5 hover:shadow-none transition-all"
                   >
                     Выбрать
                   </a>
@@ -640,7 +643,7 @@ export default function Home() {
 
                   <a
                     href="#form"
-                    className="w-max bg-white text-black font-alumni italic font-black text-sm uppercase px-6 py-2.5 rounded-full border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-y-0.5 hover:shadow-none transition-all"
+                    className="w-max bg-white text-black font-montserrat italic font-black text-sm uppercase px-6 py-2.5 rounded-full border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-y-0.5 hover:shadow-none transition-all"
                   >
                     Выбрать
                   </a>
@@ -654,7 +657,7 @@ export default function Home() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
 
               <div className="bg-paper text-black p-5 sm:p-6 border-2 border-black shadow-[4px_4px_0px_#00e5ff]">
-                <h4 className="font-alumni italic font-black text-lg mb-1 uppercase">
+                <h4 className="font-montserrat italic font-black text-lg mb-1 uppercase">
                   ДОСТАВКА — 500–1000 руб.
                 </h4>
                 <p className="text-sm font-medium">
@@ -663,7 +666,7 @@ export default function Home() {
               </div>
 
               <div className="bg-paper text-black p-5 sm:p-6 border-2 border-black shadow-[4px_4px_0px_#ffe600]">
-                <h4 className="font-alumni italic font-black text-lg mb-1 uppercase">
+                <h4 className="font-montserrat italic font-black text-lg mb-1 uppercase">
                   СЕКРЕТНЫЙ ПОДАРОК
                 </h4>
                 <p className="text-sm font-medium">
@@ -677,7 +680,7 @@ export default function Home() {
           {/* 6. ВЫПУСКИ */}
           <section id="issues">
 
-            <h2 className="text-center text-3xl sm:text-5xl md:text-6xl font-alumni italic font-black text-outline-pink mb-3 uppercase">
+            <h2 className="text-center text-3xl sm:text-5xl md:text-6xl font-montserrat italic font-black text-outline-pink mb-3 uppercase">
               Наши выпуски
             </h2>
 
@@ -766,7 +769,7 @@ export default function Home() {
 
                     {/* Шапка журнала */}
                     <div className={`${issue.color} border-b-2 border-black px-3 py-1.5 flex items-center justify-between`}>
-                      <span className="font-alumni italic font-black text-lg">КИОСК</span>
+                      <span className="font-montserrat italic font-black text-lg">КИОСК</span>
                       <span className="text-[10px] font-bold uppercase tracking-widest">{issue.month}</span>
                     </div>
 
@@ -787,7 +790,7 @@ export default function Home() {
                     {/* Чипы с содержимым */}
                     <div className="px-2 pt-2 space-y-1.5">
                       {issue.chips.map((chip, j) => (
-                        <div key={j} className={`${chip.color} border-2 border-black px-2 py-1 text-[12px] font-alumni font-black uppercase leading-tight text-center`}>
+                        <div key={j} className={`${chip.color} border-2 border-black px-2 py-1 text-[11px] font-montserrat font-black uppercase leading-tight text-center`}>
                           {chip.text}
                         </div>
                       ))}
@@ -810,7 +813,7 @@ export default function Home() {
 
             <div className="w-full max-w-4xl mx-auto text-center mb-8 md:mb-10">
 
-              <h2 className="text-3xl sm:text-5xl md:text-7xl font-alumni italic font-black text-outline-pink uppercase mb-4">
+              <h2 className="text-3xl sm:text-5xl md:text-7xl font-montserrat italic font-black text-outline-pink uppercase mb-4">
                 Анкета будущего номера
               </h2>
 
@@ -849,7 +852,7 @@ export default function Home() {
               />
             </div>
 
-            <h3 className="text-4xl font-alumni italic font-black text-outline-pink mb-2 uppercase">
+            <h3 className="text-4xl font-montserrat italic font-black text-outline-pink mb-2 uppercase">
               КИОСК
             </h3>
 
@@ -861,11 +864,11 @@ export default function Home() {
 
           <div>
 
-            <h4 className="font-alumni italic font-black text-lg text-white mb-6 uppercase">
+            <h4 className="font-montserrat italic font-black text-lg text-white mb-6 uppercase">
               В номере
             </h4>
 
-            <ul className="space-y-4 font-alumni italic font-black text-base text-kiosk-pink">
+            <ul className="space-y-4 font-montserrat italic font-black text-base text-kiosk-pink">
               <li>
                 <a href="#about" className="uppercase hover:underline">О бренде</a>
                 <span className="block text-xs text-kiosk-cyan not-italic font-medium mt-0.5">зачем мы всё это</span>
@@ -892,11 +895,11 @@ export default function Home() {
 
           <div>
 
-            <h4 className="font-alumni italic font-black text-lg text-white mb-6 uppercase">
+            <h4 className="font-montserrat italic font-black text-lg text-white mb-6 uppercase">
               Связь
             </h4>
 
-            <ul className="space-y-4 font-alumni italic font-black text-base text-kiosk-pink">
+            <ul className="space-y-4 font-montserrat italic font-black text-base text-kiosk-pink">
               <li>
                 <a href="mailto:privet@kiosk-mag.nu" className="uppercase hover:underline">Почта</a>
                 <span className="block text-white/80 font-medium mt-0.5">privet@kiosk-mag.nu</span>

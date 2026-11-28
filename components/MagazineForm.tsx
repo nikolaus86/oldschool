@@ -215,7 +215,7 @@ export default function MagazineForm({ initialParams, onGenerate, loading }: Pro
         {/* ШАГ 1: ГЕРОЙ */}
         {step === 1 && (
           <div className="animate-fade-in space-y-6">
-            <h2 className="text-2xl md:text-3xl font-alumni italic font-black uppercase">
+            <h2 className="text-2xl md:text-3xl font-montserrat italic font-black uppercase">
               Кто попадёт на обложку?
             </h2>
 
@@ -297,7 +297,7 @@ export default function MagazineForm({ initialParams, onGenerate, loading }: Pro
         {/* ШАГ 2: ЛИЧНОСТЬ */}
         {step === 2 && (
           <div className="animate-fade-in space-y-6">
-            <h2 className="text-2xl md:text-3xl font-alumni italic font-black uppercase">
+            <h2 className="text-2xl md:text-3xl font-montserrat italic font-black uppercase">
               Личность — какой он на самом деле?
             </h2>
 
@@ -347,7 +347,7 @@ export default function MagazineForm({ initialParams, onGenerate, loading }: Pro
         {/* ШАГ 3: ПОРТРЕТ / ПИСЬМО */}
         {step === 3 && (
           <div className="animate-fade-in space-y-6">
-            <h2 className="text-2xl md:text-3xl font-alumni italic font-black uppercase">
+            <h2 className="text-2xl md:text-3xl font-montserrat italic font-black uppercase">
               Портрет человека или тёплое послание
             </h2>
 
@@ -390,7 +390,7 @@ export default function MagazineForm({ initialParams, onGenerate, loading }: Pro
         {/* ШАГ 4: ТЕСТЫ, ИГРЫ, КОМИКС */}
         {step === 4 && (
           <div className="animate-fade-in space-y-6">
-            <h2 className="text-2xl md:text-3xl font-alumni italic font-black uppercase">
+            <h2 className="text-2xl md:text-3xl font-montserrat italic font-black uppercase">
               Любимое занятие детства — тесты и игры!
             </h2>
 
@@ -440,7 +440,7 @@ export default function MagazineForm({ initialParams, onGenerate, loading }: Pro
         {/* ШАГ 5: ФИНАЛ */}
         {step === 5 && (
           <div className="animate-fade-in space-y-6">
-            <h2 className="text-2xl md:text-3xl font-alumni italic font-black uppercase">
+            <h2 className="text-2xl md:text-3xl font-montserrat italic font-black uppercase">
               Time to shine — финальные штрихи
             </h2>
 
@@ -514,7 +514,7 @@ export default function MagazineForm({ initialParams, onGenerate, loading }: Pro
                 Назад
               </button>
             )}
-            <button type="submit" disabled={loading} className="bg-kiosk-pink text-white font-alumni italic font-black text-lg px-8 py-3 rounded-full border-2 border-black shadow-[4px_4px_0px_#000] hover:translate-y-1 hover:shadow-[2px_2px_0px_#000] transition-all disabled:opacity-50 uppercase">
+            <button type="submit" disabled={loading} className="bg-kiosk-pink text-white font-montserrat italic font-black text-lg px-8 py-3 rounded-full border-2 border-black shadow-[4px_4px_0px_#000] hover:translate-y-1 hover:shadow-[2px_2px_0px_#000] transition-all disabled:opacity-50 uppercase">
               {loading ? "ОТПРАВКА..." : step === TOTAL_STEPS ? "ОТПРАВИТЬ АНКЕТУ →" : "ДАЛЬШЕ →"}
             </button>
           </div>
