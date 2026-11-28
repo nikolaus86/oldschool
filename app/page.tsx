@@ -282,11 +282,18 @@ export default function Home() {
 
               <div className="flex-1 min-w-0 p-5 sm:p-8 md:p-12 relative border-b-4 md:border-b-0 md:border-r-4 border-gray-300 bg-grid-paper">
 
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-rubik italic font-black text-kiosk-purple uppercase mb-6 leading-tight">
+                {/* Силуэт девушки — слева внизу, как в референсе */}
+                <img
+                  src="/silhouette.png"
+                  alt="Девушка с плеером"
+                  className="absolute -bottom-8 -left-8 w-64 sm:w-72 max-w-[70%] opacity-90 z-0 pointer-events-none"
+                />
+
+                <h2 className="relative z-10 text-3xl sm:text-4xl md:text-5xl font-rubik italic font-black text-kiosk-purple uppercase mb-6 leading-tight">
                   Мы вернули те самые журналы
                 </h2>
 
-                <div className="space-y-4 text-sm sm:text-base font-medium">
+                <div className="relative z-10 space-y-4 text-sm sm:text-base font-medium">
                   <p>
                     В детстве всё важное было на бумаге: обложка с обладателем премии, вкладыш с наклейками, страница с тестом, который решал, кем тебе быть в этом месяце.
                   </p>
@@ -303,7 +310,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                <p className="font-neucha text-2xl text-kiosk-pink mt-8">
+                <p className="relative z-10 font-neucha text-2xl text-kiosk-pink mt-8">
                   бумага, клей, ножницы и очень много любви
                 </p>
 
@@ -311,13 +318,7 @@ export default function Home() {
 
               <div className="flex-1 min-w-0 p-5 sm:p-8 flex flex-col justify-center items-center bg-[#f4ecd8] relative overflow-hidden min-h-[400px]">
 
-                <img
-                  src="/silhouette.png"
-                  alt="Silhouette"
-                  className="absolute -bottom-8 -left-8 w-64 max-w-[70%] opacity-90 z-0 pointer-events-none"
-                />
-
-                <div className="relative z-10 w-full max-w-[320px] sm:max-w-[400px] md:max-w-[480px] bg-white shadow-2xl flex items-center justify-center mb-6 rotate-2 p-1 border-2 border-gray-300 hover:rotate-0 transition-transform duration-300">
+                <div className="relative z-10 w-full max-w-[280px] sm:max-w-[360px] md:max-w-[420px] bg-white shadow-2xl flex items-center justify-center mb-6 rotate-2 p-1 border-2 border-gray-300 hover:rotate-0 transition-transform duration-300">
 
                   <img
                     src="/magazine-cover.jpg"
@@ -327,7 +328,7 @@ export default function Home() {
 
                 </div>
 
-                <div className="relative z-10 self-start bg-yellow-200 p-4 w-full max-w-xs font-bold text-center border-2 border-black -rotate-1 text-sm shadow-[3px_3px_0px_#000]">
+                <div className="relative z-10 bg-yellow-200 p-4 w-full max-w-xs font-bold text-center border-2 border-black -rotate-1 text-sm shadow-[3px_3px_0px_#000]">
                   «Каждый номер печатается в одном экземпляре — второго такого не будет»
                 </div>
 
