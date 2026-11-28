@@ -42,11 +42,10 @@ body {
   text-shadow: 3px 3px 0px #000;
 }
 
-/* Белые буквы с розовым контуром — заголовки в жёлтых окнах */
+/* Розовые заголовки в жёлтых окнах — как в макете, с белой тенью-наклейкой */
 .title-outline-pink {
-  color: #fff;
-  -webkit-text-stroke: 1.6px #ff007f;
-  text-shadow: 2px 2px 0px #000;
+  color: var(--color-kiosk-pink);
+  text-shadow: 2px 2px 0px #fff;
 }
 
 /* Клетчатый фон для бумаги */

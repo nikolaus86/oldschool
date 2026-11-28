@@ -379,7 +379,7 @@ export default function Home() {
                         {pair.badge}
                       </div>
 
-                      <h3 className="title-outline-pink font-montserrat italic font-black text-xl mb-1 uppercase inline-block -skew-x-6">
+                      <h3 className="title-outline-pink font-montserrat italic font-black text-xl mb-1 uppercase inline-block -skew-x-3">
                         {pair.title}
                       </h3>
 
