@@ -280,13 +280,13 @@ export default function Home() {
 
             <div className="bg-paper text-black rounded-lg overflow-hidden flex flex-col md:flex-row shadow-[10px_10px_0px_#ff007f] border-4 border-white/20 relative">
 
-              <div className="flex-1 min-w-0 p-5 sm:p-8 md:p-12 relative border-b-4 md:border-b-0 md:border-r-4 border-gray-300 bg-grid-paper">
+              <div className="flex-1 min-w-0 p-5 sm:p-8 md:p-12 pb-40 md:pb-48 relative border-b-4 md:border-b-0 md:border-r-4 border-gray-300 bg-grid-paper">
 
                 {/* Силуэт девушки — слева внизу, как в референсе */}
                 <img
                   src="/silhouette.png"
                   alt="Девушка с плеером"
-                  className="absolute -bottom-8 -left-8 w-64 sm:w-72 max-w-[70%] opacity-90 z-0 pointer-events-none"
+                  className="absolute bottom-0 -left-6 h-40 w-40 sm:h-44 sm:w-44 object-cover object-top opacity-90 z-0 pointer-events-none"
                 />
 
                 <h2 className="relative z-10 text-3xl sm:text-4xl md:text-5xl font-rubik italic font-black text-kiosk-purple uppercase mb-6 leading-tight">
