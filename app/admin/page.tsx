@@ -60,7 +60,7 @@ const VALUE_FORMATTERS: Record<string, (v: any) => string> = {
       cinema: "Кино",
       style: "Стиль и образ",
       attributes: "Личные атрибуты",
-    }[v] || v || "—"),
+    } as Record<string, string>)[v] || v || "—",
 };
 
 const PHOTO_SECTIONS: { key: string; label: string }[] = [
@@ -124,7 +124,7 @@ export default function AdminPage() {
       }
 
       setOrders((prev) => prev.map((o) => (o.id === id ? { ...o, status } : o)));
-      setSelectedOrder((prev) => (prev && prev.id === id ? { ...prev, status } : prev));
+      setSelectedOrder((prev: any) => (prev && prev.id === id ? { ...prev, status } : prev));
     } catch (e: any) {
       alert(e.message || "Ошибка обновления статуса");
     } finally {
