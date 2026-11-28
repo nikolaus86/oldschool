@@ -327,7 +327,7 @@ export default function Home() {
 
                 </div>
 
-                <div className="relative z-10 bg-yellow-200 p-4 w-full max-w-xs font-bold text-center border-2 border-black -rotate-1 text-sm shadow-[3px_3px_0px_#000]">
+                <div className="relative z-10 self-start bg-yellow-200 p-4 w-full max-w-xs font-bold text-center border-2 border-black -rotate-1 text-sm shadow-[3px_3px_0px_#000]">
                   «Каждый номер печатается в одном экземпляре — второго такого не будет»
                 </div>
 
