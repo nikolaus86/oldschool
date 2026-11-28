@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Inter, Neucha } from "next/font/google";
+import { Montserrat, Inter, Neucha, Comfortaa } from "next/font/google";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -7,6 +7,13 @@ const montserrat = Montserrat({
   style: ["normal", "italic"],
   subsets: ["latin", "cyrillic"],
   variable: "--font-montserrat",
+});
+
+// Округлый геометрический шрифт — вопросы в диалогах и подзаголовки
+const comfortaa = Comfortaa({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-comfortaa",
 });
 
 const inter = Inter({
@@ -31,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru" className={`${montserrat.variable} ${inter.variable} ${neucha.variable}`}>
+    <html lang="ru" className={`${montserrat.variable} ${inter.variable} ${neucha.variable} ${comfortaa.variable}`}>
       <body className="bg-[#1a0b2e] text-white font-inter antialiased min-h-screen selection:bg-pink-500 selection:text-white">
         {children}
       </body>
