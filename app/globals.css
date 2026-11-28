@@ -42,10 +42,11 @@ body {
   text-shadow: 3px 3px 0px #000;
 }
 
-/* Розовые заголовки в жёлтых окнах — как в макете, с белой тенью-наклейкой */
+/* Белые буквы с розовым контуром — заголовки в жёлтых окнах */
 .title-outline-pink {
-  color: var(--color-kiosk-pink);
-  text-shadow: 2px 2px 0px #fff;
+  color: #fff;
+  -webkit-text-stroke: 1px #ff007f;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.85);
 }
 
 /* watch fix */
