@@ -17,10 +17,10 @@ const GARLAND_GLYPHS: Partial<Record<GarlandVariant, string>> = {
 
 function Garland({ variant }: { variant: GarlandVariant }) {
   if (variant === "beads" || variant === "neon") {
-    return <div className={`garland garland-${variant} -my-6 md:-my-10`} aria-hidden="true" />;
+    return <div className={`garland garland-${variant}`} aria-hidden="true" />;
   }
   return (
-    <div className={`garland garland-${variant} -my-6 md:-my-10`} aria-hidden="true">
+    <div className={`garland garland-${variant}`} aria-hidden="true">
       {Array.from({ length: 14 }, (_, i) => (
         <span
           key={i}
@@ -893,7 +893,7 @@ export default function Home() {
               />
             </div>
 
-            <h3 className="text-4xl font-montserrat italic font-black text-outline-pink mb-2 uppercase">
+            <h3 className="text-5xl font-rubik italic font-black text-outline-pink mb-2 uppercase">
               КИОСК
             </h3>
 
