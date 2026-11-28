@@ -46,10 +46,10 @@ body {
 .title-outline-pink {
   color: #fff;
   text-shadow:
-    2px 0 0 #ff007f, -2px 0 0 #ff007f,
-    0 2px 0 #ff007f, 0 -2px 0 #ff007f,
-    1px 1px 0 #ff007f, -1px 1px 0 #ff007f,
-    1px -1px 0 #ff007f, -1px -1px 0 #ff007f,
+    2px 0 0 #d6006b, -2px 0 0 #d6006b,
+    0 2px 0 #d6006b, 0 -2px 0 #d6006b,
+    1px 1px 0 #d6006b, -1px 1px 0 #d6006b,
+    1px -1px 0 #d6006b, -1px -1px 0 #d6006b,
     3px 3px 0 rgba(0, 0, 0, 0.8);
 }
 
