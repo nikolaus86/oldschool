@@ -6,6 +6,34 @@ import MagazineForm from "@/components/MagazineForm";
 import { DEFAULT_PARAMS, STORAGE_KEY } from "@/types/magazine";
 import type { MagazineParams } from "@/types/magazine";
 
+// Анимированные гирлянды-разделители между секциями
+type GarlandVariant = "lights" | "stars" | "hearts" | "beads" | "neon" | "sparkles";
+
+const GARLAND_GLYPHS: Partial<Record<GarlandVariant, string>> = {
+  stars: "✦",
+  hearts: "💗",
+  sparkles: "✧",
+};
+
+function Garland({ variant }: { variant: GarlandVariant }) {
+  if (variant === "beads" || variant === "neon") {
+    return <div className={`garland garland-${variant} -my-6 md:-my-10`} aria-hidden="true" />;
+  }
+  return (
+    <div className={`garland garland-${variant} -my-6 md:-my-10`} aria-hidden="true">
+      {Array.from({ length: 14 }, (_, i) => (
+        <span
+          key={i}
+          className="g-item"
+          style={{ left: `${(i + 0.5) * (100 / 14)}%`, animationDelay: `${(i % 5) * 0.22}s` }}
+        >
+          {GARLAND_GLYPHS[variant] ?? ""}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 export default function Home() {
   const [navigating, setNavigating] = useState(false);
   const [isOrdered, setIsOrdered] = useState(false);
@@ -245,6 +273,8 @@ export default function Home() {
 
           </section>
 
+          <Garland variant="lights" />
+
           {/* 2. О НАС */}
           <section id="about" className="relative">
 
@@ -311,6 +341,8 @@ export default function Home() {
               </div>
             </div>
           </section>
+
+          <Garland variant="stars" />
 
           {/* 3. ЧТО ВНУТРИ ЖУРНАЛА */}
           <section id="inside">
@@ -418,6 +450,8 @@ export default function Home() {
             </div>
           </section>
 
+          <Garland variant="hearts" />
+
           {/* 4. КАК ЗАКАЗАТЬ */}
           <section id="how">
 
@@ -496,6 +530,8 @@ export default function Home() {
 
             </div>
           </section>
+
+          <Garland variant="beads" />
 
           {/* 5. ЦЕНА */}
           <section id="price">
@@ -678,6 +714,8 @@ export default function Home() {
             </div>
           </section>
 
+          <Garland variant="neon" />
+
           {/* 6. ВЫПУСКИ */}
           <section id="issues">
 
@@ -808,6 +846,8 @@ export default function Home() {
 
             </div>
           </section>
+
+          <Garland variant="sparkles" />
 
           {/* 7. АНКЕТА */}
           <section id="form" className="pt-6 md:pt-10">
