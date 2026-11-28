@@ -35,8 +35,11 @@ export async function GET(req: Request) {
     return {
       id: order.id,
       date: new Date(order.created_at).toLocaleString("ru-RU"),
-      status: orderData.status || "new",
       ...(light ? stripPhotos(orderData) : orderData),
+      // Статус всегда последним и только валидным — чтобы клиент не упал
+      status: (STATUSES as readonly string[]).includes(orderData.status as string)
+        ? (orderData.status as string)
+        : "new",
     };
   });
 

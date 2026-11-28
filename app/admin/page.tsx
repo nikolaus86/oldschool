@@ -176,11 +176,14 @@ export default function AdminPage() {
 
   const visibleOrders = filter === "all" ? orders : orders.filter((o) => (o.status || "new") === filter);
 
-  const StatusBadge = ({ status }: { status: OrderStatus }) => (
-    <span className={`${STATUS_META[status].badge} text-[10px] font-bold px-2 py-1 border border-black uppercase`}>
-      {STATUS_META[status].label}
-    </span>
-  );
+  const StatusBadge = ({ status }: { status: OrderStatus }) => {
+    const meta = STATUS_META[status] ?? STATUS_META.new;
+    return (
+      <span className={`${meta.badge} text-[10px] font-bold px-2 py-1 border border-black uppercase`}>
+        {meta.label}
+      </span>
+    );
+  };
 
   const ActionButtons = ({ order, compact = false }: { order: any; compact?: boolean }) => {
     const status: OrderStatus = order.status || "new";
