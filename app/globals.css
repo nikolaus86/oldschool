@@ -45,8 +45,12 @@ body {
 /* Белые буквы с розовым контуром — заголовки в жёлтых окнах */
 .title-outline-pink {
   color: #fff;
-  -webkit-text-stroke: 1px #ff007f;
-  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.85);
+  text-shadow:
+    2px 0 0 #ff007f, -2px 0 0 #ff007f,
+    0 2px 0 #ff007f, 0 -2px 0 #ff007f,
+    1px 1px 0 #ff007f, -1px 1px 0 #ff007f,
+    1px -1px 0 #ff007f, -1px -1px 0 #ff007f,
+    3px 3px 0 rgba(0, 0, 0, 0.8);
 }
 
 /* watch fix */
